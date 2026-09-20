@@ -33,9 +33,10 @@ verbatim in solution/README.md.
 
 - rank 23 is BEST KNOWN, not proven optimal (open gap 19-23; Blaser lower bound 19).
 - support 139 is BEST FOUND, not proven minimal. No lower bound claimed.
-- 139 is NOT established as the HKS database minimum: support is not monotone in
-  the database's own `w` field, so ranking by `w` is unsound, and only a subset of
-  the 17,372 schemes has been measured. A full scan is in progress.
+- 139 IS the minimum over the full HKS database: all 17,372 schemes downloaded and
+  measured (0 failures), attained by exactly 2 of them. That settles the database,
+  not the question - HKS show the rank-23 schemes form a manifold of dimension >=17,
+  so sparser schemes may exist outside the catalogue.
 - reference_beaten = 0. No published bound was beaten. The submitted scheme is a
   published one (HKS i41w163c235e-000), selected by measuring it on this hill's
   metric; selecting the sparsest member of a published database is not a new

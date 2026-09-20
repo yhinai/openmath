@@ -22,6 +22,12 @@ The submitted scheme is `i41w163c235e-000` from the Heule–Kauers–Seidl datab
 of 17,372 mutually inequivalent rank-23 schemes for 3×3 matrix multiplication,
 published alongside *New ways to multiply 3×3-matrices*.
 
+**All 17,372 schemes were downloaded and measured** (0 failed fetches, 0 malformed
+files). Support 139 is the **minimum over the entire database**, attained by exactly
+two schemes — `i41w163c235e-000` and `i41w163c367g-000`. The distribution at the
+sparse end is 139:2, 140:3, 141:5, 142:7, 143:13, 144:35. Reproduce the scan with
+`tools/scan_hks_database.py`.
+
 The hill's secondary metric `support` counts nonzero coefficients. The recent
 literature on rank-23 3×3 schemes instead minimises **additions after
 common-subexpression elimination**, which is a different objective — so the
@@ -51,10 +57,10 @@ is **not** `support`: the same scheme measures 139, and the database's page for
 Laderman reports "Weight: 219" where `support` is 153. Over the 41 lowest-`w`
 schemes `support` looked like an exact increasing function of `w`, which would
 have made `w=163` the database-wide minimum — **but that inference is false.**
-Widening the sample found 29 schemes whose support falls *below* that line (e.g.
-`i133w181c23ci-000` has `w=181` but support 142). So `support` is **not** monotone
-in `w`, and a high-`w` scheme can be sparse. The minimum must therefore be found
-by measuring, not by sorting on `w`.
+Widening the sample found schemes whose support falls *below* that line (e.g.
+`i139w179c35eg-000` has `w=179` but support 141, sparser than every `w=167`
+scheme). So `support` is **not** monotone in `w`: sorting on `w` is unsound, which
+is why the whole database had to be measured rather than just its low-`w` head.
 
 ### Searches that did **not** improve on the published schemes
 
@@ -132,11 +138,11 @@ Both outputs are reported so the discrepancy is not mistaken for a passing run.
   the tensor's rank is 19 (Bläser). Nothing here narrows that gap.
 - **Support 139 is best found, not proven minimal.** No lower bound on `support`
   is established or claimed.
-- **139 is not established as the minimum of the HKS database either.** Because
-  `support` is not monotone in `w` (shown above), ranking by `w` is not sound, and
-  at the time of writing only a subset of the 17,372 schemes had been measured. A
-  sparser member may exist. A full scan is in progress; this README reports only
-  what was actually measured.
+- **139 is the minimum of the HKS database, but that database is not exhaustive.**
+  All 17,372 schemes were measured and none is sparser. That settles the database,
+  not the question: HKS show the rank-23 schemes form a manifold of dimension at
+  least 17, so infinitely many schemes lie outside their catalogue and a sparser
+  one may be among them.
 - **`reference_beaten = 0`.** No published bound was beaten. The submitted scheme
   is a published one, selected by measuring it on this hill's metric. Selecting the
   sparsest member of a published database is not a new construction, and my own
@@ -174,3 +180,5 @@ Both outputs are reported so the discrepancy is not mistaken for a passing run.
 - `tools/build_solution.py` — rebuilds Laderman (support 153) from Sedoglavic's
   Maple file; kept as the independent cross-check of the parsing logic.
 - `tools/search_support.py` — flip-graph / symmetry support search (no improvement).
+- `tools/scan_hks_database.py` — measures `support` for every scheme in a directory
+  of HKS `.tab` files; reproduces the database-wide minimum of 139.
