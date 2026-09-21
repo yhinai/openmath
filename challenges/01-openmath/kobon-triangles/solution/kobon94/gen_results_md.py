@@ -16,9 +16,11 @@ NOTES = {
     ("13", "1"): "drat-trim verified",
     ("18", "0"): "DRAT verified (96.6 s)",
     ("18", "1"): "DRAT verified, 10.5 GB proof",
-    ("18", "9"): ">= 93 triangles reproduced; model kept",
     ("18", "12"): ">= 92 triangles; model kept",
+    ("18", "15"): ">= 91 triangles (weak row); model kept",
+    ("18", "17"): ">= 91 triangles (weak row); model kept",
     ("18", "6"): "**decisive row — undecided**",
+    ("18", "9"): ">= 93 triangles, strongest N=18 SAT row; model kept",
     ("19", "0"): "DRAT verified, 3.0 GB proof",
 }
 
@@ -64,6 +66,13 @@ for n in sorted(by_n, key=int):
 
 unresolved = sorted({n for n in by_n if first_sat.get(n) is None or first_unsat.get(n) is None})
 
+def rows_for(n, verdict):
+    return sorted({k for k, v, s in by_n.get(n, []) if v == verdict})
+
+n18_sat, n18_to, n18_un = rows_for("18", "SAT"), rows_for("18", "TIMEOUT"), rows_for("18", "UNSAT")
+n18_strong = min((k for k in n18_sat if k <= 9), default=None)
+n21_to = rows_for("21", "TIMEOUT")
+
 doc = f"""# Kobon triangles — is 94 attainable? (SAT sweep, host spark)
 
 Model: CNF of pseudoline arrangements extended by `kobon_missing.py` with K global
@@ -97,9 +106,13 @@ The dedicated proof attempt (`kissat --no-binary` on `p-18-6.cnf`) was SIGTERM'd
 conclusion. The sweep drivers skip rows already in `results.txt`, so the timeout is
 recorded and not retried automatically.
 
-Only `p-18-9.sat` / `p-18-12.sat` are genuine models (`s SATISFIABLE`), and they are
-kept. So: no headline result, no 94-triangle discovery, and no basis for an UNSAT
-claim. N=18 K=2..8 all TIMEOUT; K=9 and K=12 SAT; K=0,1 UNSAT.
+Genuine N=18 models (`s SATISFIABLE`) on record: K={', '.join(str(k) for k in n18_sat)}
+(K={n18_strong if n18_strong is not None else '—'} is the strongest, >= 93 triangles;
+the rest only give >= 92 or the weak >= 91 bound). They are kept under `day_work/`.
+N=18 rows on record: K={', '.join(str(k) for k in n18_un)} UNSAT;
+K={', '.join(str(k) for k in n18_to)} TIMEOUT; K={', '.join(str(k) for k in n18_sat)} SAT.
+So: no headline result, no 94-triangle discovery, and no basis for an UNSAT claim at K=6.
+N=21 rows TIMEOUT at K={', '.join(str(k) for k in n21_to) if n21_to else '—'} (no verdict yet).
 
 Rows still unresolved (no verdict on both sides of the boundary): N={', '.join(unresolved)}.
 

@@ -29,7 +29,7 @@ Boundary reproduced: K=0,1,2 UNSAT, K=3..9 SAT — first UNSAT K=2, first SAT K=
 | 11 |  7 | SAT     | 82.4    |  |
 | 12 |  0 | UNSAT   | 1.1     | drat-trim verified |
 | 12 |  1 | UNSAT   | 19.7    | drat-trim verified |
-| 18 |  9 | SAT     | 6m      | >= 93 triangles reproduced; model kept |
+| 18 |  9 | SAT     | 6m      | >= 93 triangles, strongest N=18 SAT row; model kept |
 | 12 |  2 | UNSAT   | 261.2   | drat-trim verified |
 | 11 |  8 | SAT     | 907.4   |  |
 | 11 |  9 | SAT     | 13.1    |  |
@@ -95,9 +95,11 @@ Boundary reproduced: K=0,1,2 UNSAT, K=3..9 SAT — first UNSAT K=2, first SAT K=
 | 21 |  1 | SAT     | 162.1   |  |
 | 18 | 14 | TIMEOUT | 1800.0  |  |
 | 21 |  2 | TIMEOUT | 1800.0  |  |
-| 18 | 15 | SAT     | 570.2   | >= 91 triangles (weakest of the SAT rows); model kept |
+| 18 | 15 | SAT     | 570.2   | >= 91 triangles (weak row); model kept |
 | 21 |  3 | TIMEOUT | 1800.0  |  |
 | 18 | 16 | TIMEOUT | 1800.0  |  |
+| 18 | 17 | SAT     | 1117.7  | >= 91 triangles (weak row); model kept |
+| 21 |  4 | TIMEOUT | 1800.0  |  |
 
 Thresholds per N (first UNSAT K / first SAT K):
 
@@ -108,7 +110,7 @@ Thresholds per N (first UNSAT K / first SAT K):
 - N=17: first UNSAT K=—, first SAT K=0
 - N=18: first UNSAT K=0, first SAT K=9; TIMEOUT at K=[2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16]
 - N=19: first UNSAT K=0, first SAT K=2; TIMEOUT at K=[1, 6]
-- N=21: first UNSAT K=—, first SAT K=0; TIMEOUT at K=[2, 3]
+- N=21: first UNSAT K=—, first SAT K=0; TIMEOUT at K=[2, 3, 4]
 
 ## Decisive row (N=18, K=6)
 
@@ -118,10 +120,13 @@ The dedicated proof attempt (`kissat --no-binary` on `p-18-6.cnf`) was SIGTERM'd
 conclusion. The sweep drivers skip rows already in `results.txt`, so the timeout is
 recorded and not retried automatically.
 
-Only `p-18-9.sat` / `p-18-12.sat` are genuine models (`s SATISFIABLE`), and they are
-kept. So: no headline result, no 94-triangle discovery, and no basis for an UNSAT
-claim. N=18 rows on record: K=0,1 UNSAT; K=2..8, 10, 11, 13, 14 TIMEOUT;
-K=9, 12, 15 SAT (K=9 is the strongest SAT row, >= 93; K=15 only gives >= 91).
+Genuine N=18 models (`s SATISFIABLE`) on record: K=9, 12, 15, 17
+(K=9 is the strongest, >= 93 triangles;
+the rest only give >= 92 or the weak >= 91 bound). They are kept under `day_work/`.
+N=18 rows on record: K=0, 1 UNSAT;
+K=2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16 TIMEOUT; K=9, 12, 15, 17 SAT.
+So: no headline result, no 94-triangle discovery, and no basis for an UNSAT claim at K=6.
+N=21 rows TIMEOUT at K=2, 3, 4 (no verdict yet).
 
 Rows still unresolved (no verdict on both sides of the boundary): N=15, 17, 21.
 
