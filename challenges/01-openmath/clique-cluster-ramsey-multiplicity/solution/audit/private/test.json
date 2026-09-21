@@ -1,8 +1,0 @@
-{
-  "id": "local-test-fixtures-v1",
-  "fixtures": [
-    {"schema": "weighted-two-color-blowup-v1", "weights": [1, 1], "red_rows": ["00", "00"]},
-    {"schema": "weighted-two-color-blowup-v1", "weights": [3, 1, 2], "red_rows": ["010", "101", "010"]},
-    {"schema": "weighted-two-color-blowup-v1", "weights": [6, 6, 1, 1], "red_rows": ["1101", "1101", "0010", "1100"]}
-  ]
-}
