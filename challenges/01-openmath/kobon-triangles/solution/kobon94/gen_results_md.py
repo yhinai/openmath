@@ -21,6 +21,12 @@ NOTES = {
     ("18", "17"): ">= 91 triangles (weak row); model kept",
     ("18", "6"): "**decisive row — undecided**",
     ("18", "9"): ">= 93 triangles, strongest N=18 SAT row; model kept",
+    ("18", "19"): ">= 90 triangles (weak row); model kept",
+    ("18", "20"): ">= 89 triangles (weak row); model kept",
+    ("21", "5"): ">= 81 triangles; model kept",
+    ("21", "6"): ">= 80 triangles; model kept",
+    ("23", "0"): ">= 161 triangles; model kept",
+    ("23", "1"): ">= 160 triangles; model kept",
     ("19", "0"): "DRAT verified, 3.0 GB proof",
 }
 
