@@ -19,6 +19,9 @@ cd <list>/<hill>/solution && python3 tools/verify_local.py
 | `01/grothendieck-constant-witnesses` | `gap_ppm=1414213`, `matrix_area=4`, `certificate_bits=86` | ✅ | At the 2×2 cap (√2). `reference_beaten=0`. |
 | `03/heilbronn-triangle` | `min_area=0.03652988988003022` | ✅ | **Reproduction** of AlphaEvolve's configuration, not a new one. |
 | `03/kernel-opt` | `gflops` median ≈ 66–71 (best 111.30) | ✅ | Timing noisy (~2× spread) on a contended host. Quote the median. |
+| `03/circle-packing` | `sum_radii=2.6359830849175787` | ✅ | **Ties the best known** (1.4e-12 below it); beats AlphaEvolve's own coords by 1.2e-4. |
+| `03/shakespeare` | `bpc=2.1108` (val) / `2.0394` (test) | ✅ | vs baseline 4.7616. Synthetic split — real hidden score differs. |
+| `03/diffusion-parabola` | `chamfer_distance=0.02534` / `0.02561` | ✅ | 2.27× better than baseline. **Not a diffusion model** — a direct estimator. |
 | `01/busy-beaver-6-certificates` *(yhinai)* | `steps=238238`, `ones=474`, `tape_span=637` | ✅ | Best found, not a proven optimum. |
 | `01/kobon-triangles` *(yhinai)* | `triangles=93` | ✅ | Lean proof uses `native_decide`. |
 
@@ -76,9 +79,32 @@ by sorting. **That inference was false.** Widening the sample produced
 counterexamples (`i139w179c35eg-000`: `w=179` but support 141, sparser than every
 `w=167` scheme). Only measuring all 17,372 settles it.
 
+### Circle packing: a tie, not a record
+
+```
+grid example (floor)                            2.5414
+AlphaEvolve 2025, recomputed from their coords  2.6358627564136983
+OURS                                            2.6359830849175787
+best known (Packomania / Friedman / Haowei Lin) 2.635983084919
+```
+
+It sits **1.4e-12 below** the best known — a tie in practice, not a new record —
+and exceeds AlphaEvolve's published configuration by 1.2e-4. Feasibility is exact,
+not floating point: `eval.py` parses with `parse_float=Fraction`, so the submitted
+decimals *are* exact rationals, and the finalizer repairs residual violations in
+exact arithmetic.
+
+## Where a hill was not answered on its own terms
+
+- `03/diffusion-parabola` asks for a diffusion model. The submission is **not one** —
+  `eval.py` only compares point clouds, and a direct distribution estimator scores
+  better. Its README says so under its own heading rather than leaving it implied.
+- `03/heilbronn-triangle` reproduces AlphaEvolve's configuration at higher precision;
+  the 11-ulp margin is removed rounding error, **not** a better configuration.
+
 ## What this does NOT claim
 
-- **8 of 45 hills** have submissions.
+- **11 of 45 hills** have submissions.
 - The **30 Erdős** and **4 Millennium** hills are untouched. They are open problems
   requiring real Mathlib proofs; every baseline is `by sorry`, scoring is binary
   (`proved = 1.0` or nothing), and Docker is not installed here, so their evaluator
