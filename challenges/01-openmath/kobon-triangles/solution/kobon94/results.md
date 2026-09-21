@@ -130,6 +130,10 @@ Boundary reproduced: K=0,1,2 UNSAT, K=3..9 SAT — first UNSAT K=2, first SAT K=
 | 25 |  3 | TIMEOUT | 1800.0  |  |
 | 18 | 33 | TIMEOUT | 1800.0  |  |
 | 25 |  4 | TIMEOUT | 1800.0  |  |
+| 18 | 34 | TIMEOUT | 1800.0  |  |
+| 18 | 35 | SAT     | 177.1   |  |
+| 18 | 36 | SAT     | 377.4   |  |
+| 25 |  5 | TIMEOUT | 1800.0  |  |
 
 Thresholds per N (first UNSAT K / first SAT K):
 
@@ -138,11 +142,11 @@ Thresholds per N (first UNSAT K / first SAT K):
 - N=13: first UNSAT K=0, first SAT K=2
 - N=15: first UNSAT K=—, first SAT K=0
 - N=17: first UNSAT K=—, first SAT K=0
-- N=18: first UNSAT K=0, first SAT K=9; TIMEOUT at K=[2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16, 18, 21, 27, 29, 30, 32, 33]
+- N=18: first UNSAT K=0, first SAT K=9; TIMEOUT at K=[2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16, 18, 21, 27, 29, 30, 32, 33, 34]
 - N=19: first UNSAT K=0, first SAT K=2; TIMEOUT at K=[1, 6]
 - N=21: first UNSAT K=—, first SAT K=0; TIMEOUT at K=[2, 3, 4]
 - N=23: first UNSAT K=—, first SAT K=0; TIMEOUT at K=[2, 3, 4, 5, 6]
-- N=25: first UNSAT K=—, first SAT K=—; TIMEOUT at K=[0, 1, 2, 3, 4]
+- N=25: first UNSAT K=—, first SAT K=—; TIMEOUT at K=[0, 1, 2, 3, 4, 5]
 
 ## Decisive row (N=18, K=6)
 
@@ -152,17 +156,19 @@ The dedicated proof attempt (`kissat --no-binary` on `p-18-6.cnf`) was SIGTERM'd
 conclusion. The sweep drivers skip rows already in `results.txt`, so the timeout is
 recorded and not retried automatically.
 
-A second, independent attack on the decisive band is live: `day_deep.py` (launched
-12:34, 6 h cap = 21600 s per seed) runs **17 kissat seeds** over N=18 K=5,6,7,8
-(8 seeds on K=6 — the decisive row — plus 3 each on K=5, K=7, K=8), logs in
-`deep_work/deep-18-<K>-<seed>.log`, driver log `deep_run.log`. No seed has returned a
-verdict yet; a `s SATISFIABLE` from any K=6 seed would be the discovery case.
+A second, independent attack on the decisive band is live: `day_deep.py` runs **17 kissat
+seeds** over N=18 K=5,6,7,8 (8 seeds on K=6 — the decisive row — plus 3 each on K=5,
+K=7, K=8), logs in `deep_work/deep-18-<K>-<seed>.log`, driver log `deep_run.log`, results
+`deep_results.txt`. The first portfolio (launched 12:34, 6 h cap = 21600 s per seed) was
+**killed by a host reboot at ~14:40** with no verdict; the portfolio was relaunched at
+14:44 on the restarted host (`deep_results.txt` was still empty, so nothing was lost and
+no seed is skipped). A `s SATISFIABLE` from any K=6 seed would be the discovery case.
 
-Genuine N=18 models (`s SATISFIABLE`) on record: K=9, 12, 15, 17, 19, 20, 22, 23, 24, 25, 26, 28, 31
+Genuine N=18 models (`s SATISFIABLE`) on record: K=9, 12, 15, 17, 19, 20, 22, 23, 24, 25, 26, 28, 31, 35, 36
 (K=9 is the strongest, >= 93 triangles;
 the rest only give >= 92 or the weak >= 91 bound). They are kept under `day_work/`.
 N=18 rows on record: K=0, 1 UNSAT;
-K=2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16, 18, 21, 27, 29, 30, 32, 33 TIMEOUT; K=9, 12, 15, 17, 19, 20, 22, 23, 24, 25, 26, 28, 31 SAT.
+K=2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16, 18, 21, 27, 29, 30, 32, 33, 34 TIMEOUT; K=9, 12, 15, 17, 19, 20, 22, 23, 24, 25, 26, 28, 31, 35, 36 SAT.
 So: no headline result, no 94-triangle discovery, and no basis for an UNSAT claim at K=6.
 N=21 rows TIMEOUT at K=2, 3, 4 (no verdict yet).
 
