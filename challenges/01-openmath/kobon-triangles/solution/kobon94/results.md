@@ -82,6 +82,10 @@ Boundary reproduced: K=0,1,2 UNSAT, K=3..9 SAT — first UNSAT K=2, first SAT K=
 | 17 |  6 | SAT     | 81.7    |  |
 | 18 |  8 | TIMEOUT | 1800.0  |  |
 | 19 |  0 | UNSAT   | 407.4   | cert pending |
+| 18 | 10 | TIMEOUT | 1800.0  |  |
+| 19 |  1 | TIMEOUT | 1800.0  |  |
+| 19 |  2 | SAT     | 89.1    |  |
+| 19 |  3 | SAT     | 186.2   |  |
 
 Thresholds per N (first UNSAT K / first SAT K):
 
@@ -90,8 +94,8 @@ Thresholds per N (first UNSAT K / first SAT K):
 - N=13: first UNSAT K=0, first SAT K=2
 - N=15: first UNSAT K=—, first SAT K=0
 - N=17: first UNSAT K=—, first SAT K=0
-- N=18: first UNSAT K=0, first SAT K=9; TIMEOUT at K=[2, 3, 4, 5, 6, 7, 8]
-- N=19: first UNSAT K=0, first SAT K=—
+- N=18: first UNSAT K=0, first SAT K=9; TIMEOUT at K=[2, 3, 4, 5, 6, 7, 8, 10]
+- N=19: first UNSAT K=0, first SAT K=2; TIMEOUT at K=[1]
 
 ## Decisive row (N=18, K=6)
 
@@ -105,7 +109,7 @@ Only `p-18-9.sat` / `p-18-12.sat` are genuine models (`s SATISFIABLE`), and they
 kept. So: no headline result, no 94-triangle discovery, and no basis for an UNSAT
 claim. N=18 K=2..8 all TIMEOUT; K=9 and K=12 SAT; K=0,1 UNSAT.
 
-Rows still unresolved (no verdict on both sides of the boundary): N=15, 17, 19.
+Rows still unresolved (no verdict on both sides of the boundary): N=15, 17.
 
 ## Machine-checked certificates (`day_work/certifier_state.json`)
 
