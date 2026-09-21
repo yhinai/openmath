@@ -23,6 +23,8 @@ NOTES = {
     ("18", "9"): ">= 93 triangles, strongest N=18 SAT row; model kept",
     ("18", "19"): ">= 90 triangles (weak row); model kept",
     ("18", "20"): ">= 89 triangles (weak row); model kept",
+    ("18", "22"): ">= 88 triangles (weak row); model kept",
+    ("18", "23"): ">= 88 triangles (weak row); model kept",
     ("21", "5"): ">= 81 triangles; model kept",
     ("21", "6"): ">= 80 triangles; model kept",
     ("23", "0"): ">= 161 triangles; model kept",
