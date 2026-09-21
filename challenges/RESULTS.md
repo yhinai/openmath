@@ -14,8 +14,8 @@ cd <list>/<hill>/solution && python3 tools/verify_local.py
 | hill | metrics (verbatim) | passed | honest status |
 | --- | --- | --- | --- |
 | `01/clique-cluster-ramsey-multiplicity` | `reference_beaten=1`, `density_ppt=30142188577` | ✅ | **Candidate improvement** on the frozen reference. Margin 0.000282%. Unreviewed. |
-| `01/matrix-multiplication-tensor-3x3` | `rank=23`, `support=139` | ✅ | Minimal support over all 17,372 HKS schemes. Rank 23 is best *known*. Lean-certified. |
-| `01/collatz-modular-descent` | `coverage_ppm=989242`/`722728`, `min_descent_ppm=250000`, `rule_count=503` | ✅ | Coverage **provably maximal**. ppm values are fixture-dependent. |
+| `01/matrix-multiplication-tensor-3x3` 🔒 | `rank=23`, `support=139` | ✅ | Minimal support over all 17,372 HKS schemes. Rank 23 is best *known*. Lean-certified. |
+| `01/collatz-modular-descent` 🔒 | `coverage_ppm=989242`/`722728`, `min_descent_ppm=250000`, `rule_count=503` | ✅ | Coverage **provably maximal**. ppm values are fixture-dependent. |
 | `01/grothendieck-constant-witnesses` | `gap_ppm=1414213`, `matrix_area=4`, `certificate_bits=86` | ✅ | At the 2×2 cap (√2). `reference_beaten=0`. |
 | `03/heilbronn-triangle` | `min_area=0.03652988988003022` | ✅ | **Reproduction** of AlphaEvolve's configuration, not a new one. |
 | `03/kernel-opt` | `gflops` median ≈ 66–71 (best 111.30) | ✅ | Timing noisy (~2× spread) on a contended host. Quote the median. |
@@ -24,6 +24,8 @@ cd <list>/<hill>/solution && python3 tools/verify_local.py
 | `03/diffusion-parabola` | `chamfer_distance=0.02534` / `0.02561` | ✅ | 2.27× better than baseline. **Not a diffusion model** — a direct estimator. |
 | `01/busy-beaver-6-certificates` *(yhinai)* | `steps=238238`, `ones=474`, `tape_span=637` | ✅ | Best found, not a proven optimum. |
 | `01/kobon-triangles` *(yhinai)* | `triangles=93` | ✅ | Lean proof uses `native_decide`. |
+
+🔒 = carries a kernel-checked Lean proof (`lake build`). 2 of 11.
 
 ## The two results worth defending
 
@@ -64,8 +66,16 @@ theorem closes by **`decide +kernel`** — no `native_decide`, no `sorry`, no `a
 `brent_all` depends on `propext` alone; the other three on no axioms.
 
 ```bash
-lake build   # Build completed successfully (7 jobs)
+lake build   # Build completed successfully (8 jobs)
 ```
+
+`OpenMath/Collatz.lean` likewise re-checks all 503 submitted Collatz descent rules
+against the conditions `eval.py` enforces — 2-adic valuations, contractivity,
+strict descent — by `decide +kernel`, depending on **no axioms at all**. Negative
+control: altering a single exponent makes Lean reject the proof.
+
+It does **not** prove coverage maximality (that remains a Python brute force), and
+nothing about the Collatz conjecture.
 
 For contrast, the archive's existing `Kobon.lean` needs `native_decide`, which
 trusts the compiler rather than the kernel. I tested whether plain `decide` could
