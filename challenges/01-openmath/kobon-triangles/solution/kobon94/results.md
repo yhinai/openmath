@@ -19,78 +19,103 @@ Boundary reproduced: K=0,1,2 UNSAT, K=3..9 SAT — first UNSAT K=2, first SAT K=
 
 | N  | K  | verdict | seconds | notes |
 |----|----|---------|---------|-------|
-| 11 | 0  | UNSAT   | 0.5     | drat-trim verified |
-| 11 | 1  | UNSAT   | 9.3     | drat-trim verified |
-| 11 | 2  | UNSAT   | 97.3    | drat-trim verified |
-| 11 | 3  | SAT     | 34.0    | |
-| 11 | 4  | SAT     | 50.5    | |
-| 11 | 5  | SAT     | 272.2   | |
-| 11 | 6  | SAT     | 37.4    | |
-| 11 | 7  | SAT     | 82.4    | |
-| 12 | 0  | UNSAT   | 1.1     | drat-trim verified |
-| 12 | 1  | UNSAT   | 19.7    | drat-trim verified |
-| 18 | 9  | SAT     | 6m      | >= 93 triangles reproduced; model kept |
-| 12 | 2  | UNSAT   | 261.2   | drat-trim verified |
-| 11 | 8  | SAT     | 907.4   | |
-| 11 | 9  | SAT     | 13.1    | |
-| 18 | 0  | UNSAT   | 30.3    | DRAT verified (96.6 s) |
-| 12 | 3  | TIMEOUT | 1800.0  | |
-| 18 | 1  | UNSAT   | 1648.7  | DRAT verified, 10.5 GB proof |
-| 12 | 4  | TIMEOUT | 1800.0  | |
-| 18 | 2  | TIMEOUT | 1800.0  | |
+| 11 |  0 | UNSAT   | 0.5     | drat-trim verified |
+| 11 |  1 | UNSAT   | 9.3     | drat-trim verified |
+| 11 |  2 | UNSAT   | 97.3    | drat-trim verified |
+| 11 |  3 | SAT     | 34.0    |  |
+| 11 |  4 | SAT     | 50.5    |  |
+| 11 |  5 | SAT     | 272.2   |  |
+| 11 |  6 | SAT     | 37.4    |  |
+| 11 |  7 | SAT     | 82.4    |  |
+| 12 |  0 | UNSAT   | 1.1     | drat-trim verified |
+| 12 |  1 | UNSAT   | 19.7    | drat-trim verified |
+| 18 |  9 | SAT     | 6m      | >= 93 triangles reproduced; model kept |
+| 12 |  2 | UNSAT   | 261.2   | drat-trim verified |
+| 11 |  8 | SAT     | 907.4   |  |
+| 11 |  9 | SAT     | 13.1    |  |
+| 18 |  0 | UNSAT   | 30.3    | DRAT verified (96.6 s) |
+| 12 |  3 | TIMEOUT | 1800.0  |  |
+| 18 |  1 | UNSAT   | 1648.7  | DRAT verified, 10.5 GB proof |
+| 12 |  4 | TIMEOUT | 1800.0  |  |
+| 18 |  2 | TIMEOUT | 1800.0  |  |
 | 18 | 12 | SAT     | 1h      | >= 92 triangles; model kept |
-| 18 | 3  | TIMEOUT | 1h      | driver 2 |
-| 18 | 6  | TIMEOUT | 1h      | **decisive row — undecided** |
-| 12 | 5  | TIMEOUT | 1873.7  | |
-| 18 | 3  | TIMEOUT | 1803.3  | driver 1 |
-| 12 | 6  | TIMEOUT | 1800.0  | |
-| 18 | 4  | TIMEOUT | 1800.0  | |
-| 12 | 7  | TIMEOUT | 1800.0  | |
-| 18 | 5  | TIMEOUT | 1800.0  | |
-| 12 | 8  | TIMEOUT | 1800.0  | |
-| 18 | 7  | TIMEOUT | 1800.0  | new at 04:20 checkpoint |
-| 12 | 9  | SAT     | 54.4    | new at 04:20 checkpoint |
-| 13 | 0  | UNSAT   | 2.3     | drat-trim verified |
-| 13 | 1  | UNSAT   | 72.8    | drat-trim verified |
-| 13 | 2  | SAT     | 7.9     | |
-| 13 | 3  | SAT     | 7.8     | |
-| 13 | 4  | SAT     | 28.4    | |
-| 13 | 5  | SAT     | 32.6    | |
-| 13 | 6  | SAT     | 87.7    | |
-| 13 | 7  | SAT     | 21.7    | |
-| 13 | 8  | SAT     | 43.0    | |
-| 13 | 9  | SAT     | 25.1    | |
-| 15 | 0  | SAT     | 3.9     | |
-| 15 | 1  | SAT     | 1.5     | |
+| 18 |  3 | TIMEOUT | 1h      |  |
+| 18 |  6 | TIMEOUT | 1h      | **decisive row — undecided** |
+| 12 |  5 | TIMEOUT | 1873.7  |  |
+| 18 |  3 | TIMEOUT | 1803.3  |  |
+| 12 |  6 | TIMEOUT | 1800.0  |  |
+| 18 |  4 | TIMEOUT | 1800.0  |  |
+| 12 |  7 | TIMEOUT | 1800.0  |  |
+| 18 |  5 | TIMEOUT | 1800.0  |  |
+| 12 |  8 | TIMEOUT | 1800.0  |  |
+| 18 |  7 | TIMEOUT | 1800.0  |  |
+| 12 |  9 | SAT     | 54.4    |  |
+| 13 |  0 | UNSAT   | 2.3     | drat-trim verified |
+| 13 |  1 | UNSAT   | 72.8    | drat-trim verified |
+| 13 |  2 | SAT     | 7.9     |  |
+| 13 |  3 | SAT     | 7.8     |  |
+| 13 |  4 | SAT     | 28.4    |  |
+| 13 |  5 | SAT     | 32.6    |  |
+| 13 |  6 | SAT     | 87.7    |  |
+| 13 |  7 | SAT     | 21.7    |  |
+| 13 |  8 | SAT     | 43.0    |  |
+| 13 |  9 | SAT     | 25.1    |  |
+| 15 |  0 | SAT     | 3.9     |  |
+| 15 |  1 | SAT     | 1.5     |  |
+| 15 |  2 | SAT     | 166.9   |  |
+| 15 |  3 | SAT     | 20.0    |  |
+| 15 |  4 | SAT     | 50.5    |  |
+| 15 |  5 | SAT     | 3.7     |  |
+| 15 |  6 | SAT     | 11.9    |  |
+| 15 |  7 | SAT     | 12.1    |  |
+| 15 |  8 | SAT     | 6.1     |  |
+| 15 |  9 | SAT     | 49.3    |  |
+| 15 | 10 | SAT     | 91.9    |  |
+| 15 | 11 | SAT     | 41.1    |  |
+| 15 | 12 | SAT     | 13.6    |  |
+| 17 |  0 | SAT     | 12.9    |  |
+| 17 |  1 | SAT     | 96.2    |  |
+| 17 |  2 | SAT     | 82.6    |  |
+| 17 |  3 | SAT     | 193.9   |  |
+| 17 |  4 | SAT     | 398.1   |  |
+| 17 |  5 | SAT     | 30.7    |  |
+| 17 |  6 | SAT     | 81.7    |  |
+| 18 |  8 | TIMEOUT | 1800.0  |  |
+| 19 |  0 | UNSAT   | 407.4   | cert pending |
 
 Thresholds per N (first UNSAT K / first SAT K):
 
-- N=11: first UNSAT K=0, first SAT K=3 — calibration boundary holds.
-- N=12: first UNSAT K=0 (also 1, 2); first SAT K=9. K=3..8 TIMEOUT.
-- N=13: first UNSAT K=0 (also 1); first SAT K=2.
-- N=15: first SAT K=0; no UNSAT yet (K=2 running).
-- N=18: first UNSAT K=0 (also 1); first SAT K=9 (>=93). K=2..7 TIMEOUT —
-  **K=6 undecided**; no UNSAT and no SAT verdict for the decisive row.
+- N=11: first UNSAT K=0, first SAT K=3
+- N=12: first UNSAT K=0, first SAT K=9; TIMEOUT at K=[3, 4, 5, 6, 7, 8]
+- N=13: first UNSAT K=0, first SAT K=2
+- N=15: first UNSAT K=—, first SAT K=0
+- N=17: first UNSAT K=—, first SAT K=0
+- N=18: first UNSAT K=0, first SAT K=9; TIMEOUT at K=[2, 3, 4, 5, 6, 7, 8]
+- N=19: first UNSAT K=0, first SAT K=—
 
 ## Decisive row (N=18, K=6)
 
-**Not decided.** TIMEOUT 1800 s, then TIMEOUT 1 h in the parallel probe. The
-dedicated proof attempt (`kissat --no-binary` on `p-18-6.cnf`) was SIGTERM'd at
+**Not decided — TIMEOUT, twice** (1800 s in the sweep; 1 h in the parallel probe).
+The dedicated proof attempt (`kissat --no-binary` on `p-18-6.cnf`) was SIGTERM'd at
 1 h 50 m with no `s` line; the leftover `day_work/p-18-6.drat` (36 GB) contains no
-conclusion. Only `p-18-9.sat` / `p-18-12.sat` are genuine models (`s SATISFIABLE`)
-and are kept. So: no headline result, no 94-triangle discovery, and no basis for
-an UNSAT claim.
+conclusion. The sweep drivers skip rows already in `results.txt`, so the timeout is
+recorded and not retried automatically.
+
+Only `p-18-9.sat` / `p-18-12.sat` are genuine models (`s SATISFIABLE`), and they are
+kept. So: no headline result, no 94-triangle discovery, and no basis for an UNSAT
+claim. N=18 K=2..8 all TIMEOUT; K=9 and K=12 SAT; K=0,1 UNSAT.
+
+Rows still unresolved (no verdict on both sides of the boundary): N=15, 17, 19.
 
 ## Machine-checked certificates (`day_work/certifier_state.json`)
 
 Certifier babysitter (cron `*/5`, `certifier_watchdog.sh` -> `certifier.py`)
 re-solves every UNSAT row with a DRAT trace and checks it with drat-trim.
-Verified: 11:0, 11:1, 11:2, 12:0, 12:1, 12:2, **13:0, 13:1 (new since the
-previous checkpoint)**, 18:0, 18:1 (10.5 GB proof, `s VERIFIED`, rc=0) — 10 rows,
-nothing pending (all other rows are TIMEOUT/SAT).
+Verified: 11:0, 11:1, 11:2, 12:0, 12:1, 12:2, 13:0, 13:1, 18:0, 18:1 (10.5 GB
+proof, `s VERIFIED`, rc=0) — 10 rows. `19:0` (UNSAT, 407.4 s) and any other new
+UNSAT row is not yet certified; everything else is TIMEOUT/SAT.
 
-Disk: 460 GB of 3.7 TB used on `/`; `day_work` 47 GB (the dead `p-18-6.drat` is
-36 GB of it).
+Disk: 462 GB of 3.7 TB used on `/`; `day_work` 49 GB.
 
 Status text is regenerated by the supervisor cron job; `results.txt` is the raw
 append-only log from the sweep drivers (`day_run.py`, `day_run2.py`).
