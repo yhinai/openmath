@@ -8,8 +8,8 @@ the metric values come from the hills' `hill/eval.py` as recorded in
 python3 docs/make_result_figs.py     # regenerates every figure below
 ```
 
-Attribution: solutions by **charliegillet** except `busy-beaver-6-certificates` and
-`kobon-triangles` (yhinai). Figures by yhinai.
+Attribution: every solution and figure in this repository is the team's work — all
+metrics come from the hills' own `hill/eval.py`.
 
 ---
 

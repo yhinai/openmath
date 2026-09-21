@@ -33,24 +33,22 @@ C = ROOT / "challenges"
 
 
 def fig_progress():
-    """Hills with a verified submission, per list, split by worker (RESULTS.md)."""
+    """Hills with a verified submission, per list (challenges/RESULTS.md)."""
     lists = ["01-openmath\n(6 hills)", "02-erdos\n(30 hills)", "03-hello-hills-v2\n(5 hills)",
              "04-millennium\n(4 hills)"]
-    done_cg = [4, 0, 5, 0]          # charliegillet: clique-ramsey, matmul, collatz, grothendieck | hello-v2 all five
-    done_yh = [2, 0, 0, 0]          # yhinai: busy-beaver, kobon
+    done = [6, 0, 5, 0]
     total = [6, 30, 5, 4]
     fig, ax = plt.subplots(figsize=(7.2, 3.2))
     x = np.arange(len(lists))
-    ax.bar(x, done_cg, width=0.55, color=BLUE, label="charliegillet")
-    ax.bar(x, done_yh, width=0.55, bottom=done_cg, color=AMBER, label="yhinai")
-    ax.bar(x, [t - c - y for t, c, y in zip(total, done_cg, done_yh)], width=0.55,
-           bottom=[c + y for c, y in zip(done_cg, done_yh)], color=GREY, alpha=0.25,
-           label="open")
-    for xi, (c, y, t) in enumerate(zip(done_cg, done_yh, total)):
-        ax.annotate(f"{c + y}/{t}", (xi, t), ha="center", va="bottom", fontsize=10)
+    ax.bar(x, done, width=0.55, color=BLUE, label="verified submission")
+    ax.bar(x, [t - d for t, d in zip(total, done)], width=0.55, bottom=done,
+           color=GREY, alpha=0.25, label="open")
+    for xi, (d, t) in enumerate(zip(done, total)):
+        ax.annotate(f"{d}/{t}", (xi, t), ha="center", va="bottom", fontsize=10)
     ax.set_xticks(x); ax.set_xticklabels(lists, fontsize=9)
     ax.set_ylabel("hills with a verified submission")
-    ax.set_title("OpenMath progress · 11 of 45 hills solved, every metric from the hill's own eval.py", fontsize=10.5)
+    ax.set_title("OpenMath progress · 11 of 45 hills solved, every metric from the hill's own eval.py",
+                 fontsize=10.5)
     ax.legend(frameon=False, fontsize=9)
     for s in ("top", "right"):
         ax.spines[s].set_visible(False)
