@@ -3,100 +3,94 @@
 Model: CNF of pseudoline arrangements extended by `kobon_missing.py` with K global
 "missing triangle" entries. With S = N(N-2) finite segments and three distinct,
 never-shared sides per triangle, every arrangement in this model has
+`triangles >= (S - K) / 3`. For N=18, S = 288, so K=3 <=> >=95, **K=6 <=> >=94
+(the decisive question)**, K=9 <=> >=93 (best known), K=12 <=> >=92.
 
-    triangles >= (S - K) / 3
-
-For N=18, S = 288, so:
-
-| K  | implies                        |
-|----|--------------------------------|
-| 3  | >= 95 triangles                |
-| 6  | >= 94  <- the decisive question |
-| 9  | >= 93 (best known)             |
-| 12 | >= 92                          |
-
-K <= 6 SAT would exhibit >= 94 triangles; K = 6 UNSAT would prove 93 is the
-maximum in this model class. **Caveat, never overstated:** the model covers
-arrangements without parallel line pairs; those are outside it.
+K=6 SAT would exhibit >= 94 triangles; K=6 UNSAT would prove 93 is the maximum in
+this model class. **Caveat, never overstated:** arrangements with parallel line
+pairs are outside this model.
 
 ## Calibration (N=11; known: no 33-triangle arrangement, 32 is best)
 
-Boundary reproduced exactly: K=0,1,2 UNSAT, K=3..9 SAT, i.e. the first SAT K is 3
-(>= 32 triangles), the first UNSAT K is 2. A sweep that reproduces this boundary
-is trustworthy.
+Boundary reproduced: K=0,1,2 UNSAT, K=3..9 SAT — first UNSAT K=2, first SAT K=3
+(>= 32 triangles). A sweep reproducing this boundary is trustworthy.
 
-## Results (N, K, verdict, seconds) — `results.txt`
+## Results — `results.txt` (append-only, exactly the logged rows in file order)
 
-Checkpoint 2026-09-21 03:54 PDT. Both drivers alive (pids 37899, 37901; kissat
-currently on `day_work/m2-12-8.cnf` and `day_work/m-18-7.cnf`); certifier daemon
-alive, heartbeat 03:53, 8 rows certified. New rows since the 03:21 checkpoint:
-`12 7` and `18 5`, both TIMEOUT. No verdict has changed.
+| N  | K  | verdict | seconds | notes |
+|----|----|---------|---------|-------|
+| 11 | 0  | UNSAT   | 0.5     | drat-trim verified |
+| 11 | 1  | UNSAT   | 9.3     | drat-trim verified |
+| 11 | 2  | UNSAT   | 97.3    | drat-trim verified |
+| 11 | 3  | SAT     | 34.0    | |
+| 11 | 4  | SAT     | 50.5    | |
+| 11 | 5  | SAT     | 272.2   | |
+| 11 | 6  | SAT     | 37.4    | |
+| 11 | 7  | SAT     | 82.4    | |
+| 12 | 0  | UNSAT   | 1.1     | drat-trim verified |
+| 12 | 1  | UNSAT   | 19.7    | drat-trim verified |
+| 18 | 9  | SAT     | 6m      | >= 93 triangles reproduced; model kept |
+| 12 | 2  | UNSAT   | 261.2   | drat-trim verified |
+| 11 | 8  | SAT     | 907.4   | |
+| 11 | 9  | SAT     | 13.1    | |
+| 18 | 0  | UNSAT   | 30.3    | DRAT verified (96.6 s) |
+| 12 | 3  | TIMEOUT | 1800.0  | |
+| 18 | 1  | UNSAT   | 1648.7  | DRAT verified, 10.5 GB proof |
+| 12 | 4  | TIMEOUT | 1800.0  | |
+| 18 | 2  | TIMEOUT | 1800.0  | |
+| 18 | 12 | SAT     | 1h      | >= 92 triangles; model kept |
+| 18 | 3  | TIMEOUT | 1h      | driver 2 |
+| 18 | 6  | TIMEOUT | 1h      | **decisive row — undecided** |
+| 12 | 5  | TIMEOUT | 1873.7  | |
+| 18 | 3  | TIMEOUT | 1803.3  | driver 1 |
+| 12 | 6  | TIMEOUT | 1800.0  | |
+| 18 | 4  | TIMEOUT | 1800.0  | |
+| 12 | 7  | TIMEOUT | 1800.0  | |
+| 18 | 5  | TIMEOUT | 1800.0  | |
+| 12 | 8  | TIMEOUT | 1800.0  | |
+| 18 | 7  | TIMEOUT | 1800.0  | new at 04:20 checkpoint |
+| 12 | 9  | SAT     | 54.4    | new at 04:20 checkpoint |
+| 13 | 0  | UNSAT   | 2.3     | drat-trim verified |
+| 13 | 1  | UNSAT   | 72.8    | drat-trim verified |
+| 13 | 2  | SAT     | 7.9     | |
+| 13 | 3  | SAT     | 7.8     | |
+| 13 | 4  | SAT     | 28.4    | |
+| 13 | 5  | SAT     | 32.6    | |
+| 13 | 6  | SAT     | 87.7    | |
+| 13 | 7  | SAT     | 21.7    | |
+| 13 | 8  | SAT     | 43.0    | |
+| 13 | 9  | SAT     | 25.1    | |
+| 15 | 0  | SAT     | 3.9     | |
+| 15 | 1  | SAT     | 1.5     | |
 
-| N  | K  | verdict | seconds | notes | source |
-|----|----|---------|---------|-------|--------|
-| 11 | 0  | UNSAT   | 0.5     | | |
-| 11 | 1  | UNSAT   | 9.3     | | |
-| 11 | 2  | UNSAT   | 97.3    | proof verified by drat-trim (124 s + 113 s) | |
-| 11 | 3  | SAT     | 34.0    | | |
-| 11 | 4  | SAT     | 50.5    | | |
-| 11 | 5  | SAT     | 272.2   | | |
-| 11 | 6  | SAT     | 37.4    | | |
-| 11 | 7  | SAT     | 82.4    | | |
-| 11 | 8  | SAT     | 907.4   | | |
-| 11 | 9  | SAT     | 13.1    | | |
-| 12 | 0  | UNSAT   | 1.1     | drat-trim verified | |
-| 12 | 1  | UNSAT   | 19.7    | drat-trim verified | |
-| 12 | 2  | UNSAT   | 261.2   | drat-trim verified (1.42 GB proof) | |
-| 12 | 3  | TIMEOUT | 1800.0  | | |
-| 12 | 4  | TIMEOUT | 1800.0  | | |
-| 12 | 5  | TIMEOUT | 1873.7  | | |
-| 12 | 6  | TIMEOUT | 1800.0  | | |
-| 12 | 7  | TIMEOUT | 1800.0  | new at 03:49 check | `day_run2.log` |
-| 18 | 0  | UNSAT   | 30.3    | base CNF; DRAT proof verified (96.6 s) | `certifier_state.json` |
-| 18 | 1  | UNSAT   | 1648.7  | **DRAT proof verified 02:33** — 10.5 GB proof, kissat 2299 s + drat-trim 1456.8 s, `s VERIFIED` | `certifier_state.json` |
-| 18 | 2  | TIMEOUT | 1800.0  | | |
-| 18 | 3  | TIMEOUT | 1803.3  | | |
-| 18 | 3  | TIMEOUT | 1h      | second driver | |
-| 18 | 4  | TIMEOUT | 1800.0  | | |
-| 18 | 5  | TIMEOUT | 1800.0  | new at 03:49 check | `day_run.log` |
-| 18 | 6  | TIMEOUT | 1h      | decisive row — see below | |
-| 18 | 9  | SAT     | 6m      | >= 93 triangles reproduced; model kept | |
-| 18 | 12 | SAT     | 1h      | >= 92 triangles; model kept | |
+Thresholds per N (first UNSAT K / first SAT K):
 
-(rows in append order, exactly as logged; the two N=18 K=3 rows come from two
-different drivers)
-
-Threshold per N (first UNSAT K / first SAT K):
-
-- N=11: first UNSAT K=0, first SAT K=3. Calibration boundary holds.
-- N=12: first UNSAT K=0 (also K=1, K=2); first SAT not yet reached — K=3..7 TIMEOUT.
-- N=18: first UNSAT K=0 and K=1; first SAT K=9 so far (>=93 triangles reproduced).
-  K=2, K=3, K=4, K=5 and K=6 TIMEOUT; K=6 (the decisive row) undecided.
+- N=11: first UNSAT K=0, first SAT K=3 — calibration boundary holds.
+- N=12: first UNSAT K=0 (also 1, 2); first SAT K=9. K=3..8 TIMEOUT.
+- N=13: first UNSAT K=0 (also 1); first SAT K=2.
+- N=15: first SAT K=0; no UNSAT yet (K=2 running).
+- N=18: first UNSAT K=0 (also 1); first SAT K=9 (>=93). K=2..7 TIMEOUT —
+  **K=6 undecided**; no UNSAT and no SAT verdict for the decisive row.
 
 ## Decisive row (N=18, K=6)
 
-**Not yet decided — no verdict exists.** The instance has been tried twice and
-timed out (1800 s; then 1 h in the parallel probe). The dedicated proof run
-(`kissat --no-binary day_work/p-18-6.cnf day_work/p-18-6.drat`) was **killed by
-SIGTERM at 1 h 50 m (02:37) with no `s` line**; its partial trace
-`day_work/p-18-6.drat` is 36.4 GB of *no* conclusion (still on disk, unchanged),
-so there is nothing for drat-trim to check. The earlier probe's
-`day_work/p-18-6.sat` and `day_work/p-18-3.sat` are only solver stdout (no
-verdict, no model). Only `day_work/p-18-9.sat` and `day_work/p-18-12.sat` are
-genuine models (`s SATISFIABLE`), and they are kept.
+**Not decided.** TIMEOUT 1800 s, then TIMEOUT 1 h in the parallel probe. The
+dedicated proof attempt (`kissat --no-binary` on `p-18-6.cnf`) was SIGTERM'd at
+1 h 50 m with no `s` line; the leftover `day_work/p-18-6.drat` (36 GB) contains no
+conclusion. Only `p-18-9.sat` / `p-18-12.sat` are genuine models (`s SATISFIABLE`)
+and are kept. So: no headline result, no 94-triangle discovery, and no basis for
+an UNSAT claim.
 
-So there is **no headline result and no 94-triangle discovery** as of this
-checkpoint, and no basis for an UNSAT claim either.
+## Machine-checked certificates (`day_work/certifier_state.json`)
 
-## Machine-checked certificates (`day_work/CERTIFICATES.md`, `certifier_state.json`)
+Certifier babysitter (cron `*/5`, `certifier_watchdog.sh` -> `certifier.py`)
+re-solves every UNSAT row with a DRAT trace and checks it with drat-trim.
+Verified: 11:0, 11:1, 11:2, 12:0, 12:1, 12:2, **13:0, 13:1 (new since the
+previous checkpoint)**, 18:0, 18:1 (10.5 GB proof, `s VERIFIED`, rc=0) — 10 rows,
+nothing pending (all other rows are TIMEOUT/SAT).
 
-The certifier babysitter (cron `*/5`, `certifier_watchdog.sh` → `certifier.py`)
-re-solves every UNSAT row with a DRAT trace and checks it with drat-trim. Verified
-so far: 11:0, 11:1, 11:2, 12:0, 12:1, 12:2, 18:0, 18:1 (10.5 GB proof, drat-trim
-`s VERIFIED`, rc=0). Nothing else is pending (remaining rows are TIMEOUT/SAT).
+Disk: 460 GB of 3.7 TB used on `/`; `day_work` 47 GB (the dead `p-18-6.drat` is
+36 GB of it).
 
-Disk is not a constraint at this checkpoint: 460 GB used of 3.7 TB on `/`
-(`day_work` = 46 GB, of which the dead `p-18-6.drat` is 36 GB).
-
-Status text in this file is regenerated by the supervisor cron job; `results.txt`
-is the raw append-only log from the two sweep drivers (`day_run.py`, `day_run2.py`).
+Status text is regenerated by the supervisor cron job; `results.txt` is the raw
+append-only log from the sweep drivers (`day_run.py`, `day_run2.py`).
