@@ -27,8 +27,8 @@ is trustworthy.
 
 ## Results (N, K, verdict, seconds) — `results.txt`
 
-Checkpoint 2026-09-21 02:49 PDT (raw log unchanged since the 02:16 checkpoint; both
-drivers had died and were relaunched at 02:49, resuming the queue).
+Checkpoint 2026-09-21 03:21 PDT (both drivers alive; new rows since 02:49: `12 6`
+and `18 4`, both TIMEOUT).
 
 | N  | K  | verdict | seconds | notes | source |
 |----|----|---------|---------|-------|--------|
@@ -48,11 +48,13 @@ drivers had died and were relaunched at 02:49, resuming the queue).
 | 12 | 3  | TIMEOUT | 1800.0  | | |
 | 12 | 4  | TIMEOUT | 1800.0  | | |
 | 12 | 5  | TIMEOUT | 1873.7  | | |
+| 12 | 6  | TIMEOUT | 1800.0  | | |
 | 18 | 0  | UNSAT   | 30.3    | base CNF; DRAT proof verified (96.6 s) | `certifier_state.json` |
 | 18 | 1  | UNSAT   | 1648.7  | **DRAT proof verified 02:33** — 10.5 GB proof, kissat 2299 s + drat-trim 1456.8 s, `s VERIFIED` | `certifier_state.json` |
 | 18 | 2  | TIMEOUT | 1800.0  | | |
 | 18 | 3  | TIMEOUT | 1803.3  | | |
 | 18 | 3  | TIMEOUT | 1h      | | |
+| 18 | 4  | TIMEOUT | 1800.0  | | |
 | 18 | 6  | TIMEOUT | 1h      | decisive row — see below | |
 | 18 | 9  | SAT     | 6m      | >= 93 triangles reproduced; model kept | |
 | 18 | 12 | SAT     | 1h      | >= 92 triangles; model kept | |
@@ -63,9 +65,9 @@ different drivers)
 Threshold per N (first UNSAT K / first SAT K):
 
 - N=11: first UNSAT K=0, first SAT K=3. Calibration boundary holds.
-- N=12: first UNSAT K=0 (also K=1, K=2); first SAT not yet reached — K=3,4,5 TIMEOUT.
+- N=12: first UNSAT K=0 (also K=1, K=2); first SAT not yet reached — K=3,4,5,6 TIMEOUT.
 - N=18: first UNSAT K=0 and K=1; first SAT K=9 so far (>=93 triangles reproduced).
-  K=2, K=3, and K=6 TIMEOUT; K=6 (the decisive row) undecided.
+  K=2, K=3, K=4, and K=6 TIMEOUT; K=6 (the decisive row) undecided.
 
 ## Decisive row (N=18, K=6)
 
