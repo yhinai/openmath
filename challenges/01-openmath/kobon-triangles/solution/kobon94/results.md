@@ -100,6 +100,9 @@ Boundary reproduced: K=0,1,2 UNSAT, K=3..9 SAT — first UNSAT K=2, first SAT K=
 | 18 | 16 | TIMEOUT | 1800.0  |  |
 | 18 | 17 | SAT     | 1117.7  | >= 91 triangles (weak row); model kept |
 | 21 |  4 | TIMEOUT | 1800.0  |  |
+| 21 |  5 | SAT     | 1581.5  |  |
+| 18 | 18 | TIMEOUT | 1800.0  |  |
+| 18 | 19 | SAT     | 875.3   |  |
 
 Thresholds per N (first UNSAT K / first SAT K):
 
@@ -108,7 +111,7 @@ Thresholds per N (first UNSAT K / first SAT K):
 - N=13: first UNSAT K=0, first SAT K=2
 - N=15: first UNSAT K=—, first SAT K=0
 - N=17: first UNSAT K=—, first SAT K=0
-- N=18: first UNSAT K=0, first SAT K=9; TIMEOUT at K=[2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16]
+- N=18: first UNSAT K=0, first SAT K=9; TIMEOUT at K=[2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16, 18]
 - N=19: first UNSAT K=0, first SAT K=2; TIMEOUT at K=[1, 6]
 - N=21: first UNSAT K=—, first SAT K=0; TIMEOUT at K=[2, 3, 4]
 
@@ -120,11 +123,11 @@ The dedicated proof attempt (`kissat --no-binary` on `p-18-6.cnf`) was SIGTERM'd
 conclusion. The sweep drivers skip rows already in `results.txt`, so the timeout is
 recorded and not retried automatically.
 
-Genuine N=18 models (`s SATISFIABLE`) on record: K=9, 12, 15, 17
+Genuine N=18 models (`s SATISFIABLE`) on record: K=9, 12, 15, 17, 19
 (K=9 is the strongest, >= 93 triangles;
 the rest only give >= 92 or the weak >= 91 bound). They are kept under `day_work/`.
 N=18 rows on record: K=0, 1 UNSAT;
-K=2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16 TIMEOUT; K=9, 12, 15, 17 SAT.
+K=2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16, 18 TIMEOUT; K=9, 12, 15, 17, 19 SAT.
 So: no headline result, no 94-triangle discovery, and no basis for an UNSAT claim at K=6.
 N=21 rows TIMEOUT at K=2, 3, 4 (no verdict yet).
 
