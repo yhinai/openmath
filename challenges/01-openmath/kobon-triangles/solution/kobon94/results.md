@@ -37,26 +37,36 @@ is trustworthy.
 | 11 | 5  | SAT     | 272.2   |
 | 11 | 6  | SAT     | 37.4    |
 | 11 | 7  | SAT     | 82.4    |
-| 11 | 8  | SAT     | 907.4   |
-| 11 | 9  | SAT     | 13.1    |
 | 12 | 0  | UNSAT   | 1.1     |
 | 12 | 1  | UNSAT   | 19.7    |
-| 12 | 2  | UNSAT   | 261.2   |
-| 18 | 0  | UNSAT   | 30.3    |
 | 18 | 9  | SAT     | 6m (as logged) |
+| 12 | 2  | UNSAT   | 261.2   |
+| 11 | 8  | SAT     | 907.4   |
+| 11 | 9  | SAT     | 13.1    |
+| 18 | 0  | UNSAT   | 30.3    |
+| 12 | 3  | TIMEOUT | 1800.0  |
+| 18 | 1  | UNSAT   | 1648.7  |
+
+(rows in append order, exactly as logged)
 
 Threshold per N (first UNSAT K / first SAT K):
 
-- N=11: first UNSAT K=0, first SAT K=3.
-- N=12: first UNSAT K=0, first SAT not yet determined (>=3; K=3 running).
-- N=18: first UNSAT K=0, first SAT K=9 so far (>=93 triangles reproduced).
+- N=11: first UNSAT K=0, first SAT K=3. Calibration boundary holds.
+- N=12: first UNSAT K=0 (also K=1, K=2); first SAT not yet reached — K=3 TIMEOUT at 1800 s.
+- N=18: first UNSAT K=0 and K=1; first SAT K=9 so far (>=93 triangles reproduced).
+  K=6 (the decisive row) still undecided.
 
 ## Decisive row (N=18, K=6)
 
-**Not yet decided.** Three N=18 probes are in flight (`day_work/p-18-3.cnf`,
-`p-18-6.cnf`, `p-18-12.cnf`); the K=6 probe additionally writes a DRAT proof
-(`day_work/p-18-6.drat`, `kissat-p-18-6.log`) so that an UNSAT verdict can be
-machine-checked with `drat-trim` before being claimed.
+**Not yet decided.** Two independent N=18 K=6 runs are in flight:
+
+- `day_work/p-18-6.sat` (probe started 00:36, 5400 s cap) — still searching at ~3980 s.
+- `day_work/kissat-p-18-6.log` + `day_work/p-18-6.drat` — a second run started with
+  `--no-binary` writing an explicit DRAT proof, so an UNSAT verdict can be
+  machine-checked with `drat-trim` before anything is claimed.
+
+No SATISFIABLE/UNSATISFIABLE line has been emitted by either, so there is **no
+headline result and no 94-triangle discovery** as of this checkpoint.
 
 Supporting verified facts already in hand: the N=18 base CNF is UNSAT
 (51 s, proof verified by drat-trim, 96.6 s) and the N=11 K=2 UNSAT proof is
