@@ -27,46 +27,58 @@ is trustworthy.
 
 ## Results (N, K, verdict, seconds) — `results.txt`
 
-| N  | K  | verdict | seconds |
-|----|----|---------|---------|
-| 11 | 0  | UNSAT   | 0.5     |
-| 11 | 1  | UNSAT   | 9.3     |
-| 11 | 2  | UNSAT   | 97.3    |
-| 11 | 3  | SAT     | 34.0    |
-| 11 | 4  | SAT     | 50.5    |
-| 11 | 5  | SAT     | 272.2   |
-| 11 | 6  | SAT     | 37.4    |
-| 11 | 7  | SAT     | 82.4    |
-| 12 | 0  | UNSAT   | 1.1     |
-| 12 | 1  | UNSAT   | 19.7    |
-| 18 | 9  | SAT     | 6m (as logged) |
-| 12 | 2  | UNSAT   | 261.2   |
-| 11 | 8  | SAT     | 907.4   |
-| 11 | 9  | SAT     | 13.1    |
-| 18 | 0  | UNSAT   | 30.3    |
-| 12 | 3  | TIMEOUT | 1800.0  |
-| 18 | 1  | UNSAT   | 1648.7  |
+Checkpoint 2026-09-21 02:16 PDT.
 
-(rows in append order, exactly as logged)
+| N  | K  | verdict | seconds | notes |
+|----|----|---------|---------|-------|
+| 11 | 0  | UNSAT   | 0.5     | |
+| 11 | 1  | UNSAT   | 9.3     | |
+| 11 | 2  | UNSAT   | 97.3    | proof verified by drat-trim (124 s + 113 s) |
+| 11 | 3  | SAT     | 34.0    | |
+| 11 | 4  | SAT     | 50.5    | |
+| 11 | 5  | SAT     | 272.2   | |
+| 11 | 6  | SAT     | 37.4    | |
+| 11 | 7  | SAT     | 82.4    | |
+| 11 | 8  | SAT     | 907.4   | |
+| 11 | 9  | SAT     | 13.1    | |
+| 12 | 0  | UNSAT   | 1.1     | |
+| 12 | 1  | UNSAT   | 19.7    | |
+| 12 | 2  | UNSAT   | 261.2   | |
+| 12 | 3  | TIMEOUT | 1800.0  | |
+| 12 | 4  | TIMEOUT | 1800.0  | |
+| 12 | 5  | TIMEOUT | 1873.7  | |
+| 18 | 0  | UNSAT   | 30.3    | base CNF; DRAT proof verified (96.6 s) |
+| 18 | 1  | UNSAT   | 1648.7  | |
+| 18 | 2  | TIMEOUT | 1800.0  | |
+| 18 | 3  | TIMEOUT | 1803.3  | |
+| 18 | 3  | TIMEOUT | 1h      | |
+| 18 | 6  | TIMEOUT | 1h      | decisive row — see below |
+| 18 | 9  | SAT     | 6m      | >= 93 triangles reproduced; model kept |
+| 18 | 12 | SAT     | 1h      | >= 92 triangles; model kept |
+
+(rows in append order, exactly as logged; the two N=18 K=3 rows come from two
+different drivers)
 
 Threshold per N (first UNSAT K / first SAT K):
 
 - N=11: first UNSAT K=0, first SAT K=3. Calibration boundary holds.
-- N=12: first UNSAT K=0 (also K=1, K=2); first SAT not yet reached — K=3 TIMEOUT at 1800 s.
+- N=12: first UNSAT K=0 (also K=1, K=2); first SAT not yet reached — K=3,4,5 TIMEOUT.
 - N=18: first UNSAT K=0 and K=1; first SAT K=9 so far (>=93 triangles reproduced).
-  K=6 (the decisive row) still undecided.
+  K=2, K=3, and K=6 TIMEOUT; K=6 (the decisive row) undecided.
 
 ## Decisive row (N=18, K=6)
 
-**Not yet decided.** Two independent N=18 K=6 runs are in flight:
+**Not yet decided — TIMEOUT twice; no verdict exists.** A dedicated kissat run
+(`--no-binary`, DRAT trace at `day_work/p-18-6.drat`, ~29 GB, machine-checkable
+with drat-trim) is still in flight at ~89 min and has emitted no `s` line, so an
+UNSAT claim would still be checkable before being made. The earlier probe's
+`day_work/p-18-6.sat` is only solver stdout (0 model lines) — not a model, and
+not evidence of SAT. Likewise `day_work/p-18-3.sat` contains no verdict; only
+`day_work/p-18-9.sat` and `day_work/p-18-12.sat` are genuine models
+(`s SATISFIABLE`), which are kept.
 
-- `day_work/p-18-6.sat` (probe started 00:36, 5400 s cap) — still searching at ~3980 s.
-- `day_work/kissat-p-18-6.log` + `day_work/p-18-6.drat` — a second run started with
-  `--no-binary` writing an explicit DRAT proof, so an UNSAT verdict can be
-  machine-checked with `drat-trim` before anything is claimed.
-
-No SATISFIABLE/UNSATISFIABLE line has been emitted by either, so there is **no
-headline result and no 94-triangle discovery** as of this checkpoint.
+So there is **no headline result and no 94-triangle discovery** as of this
+checkpoint.
 
 Supporting verified facts already in hand: the N=18 base CNF is UNSAT
 (51 s, proof verified by drat-trim, 96.6 s) and the N=11 K=2 UNSAT proof is
