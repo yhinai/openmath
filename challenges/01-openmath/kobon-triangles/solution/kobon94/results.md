@@ -43,7 +43,7 @@ is trustworthy.
 | 12 | 1  | UNSAT   | 19.7    |
 | 12 | 2  | UNSAT   | 261.2   |
 | 18 | 0  | UNSAT   | 30.3    |
-| 18 | 9  | SAT     | 360.0   |
+| 18 | 9  | SAT     | 6m (as logged) |
 
 Threshold per N (first UNSAT K / first SAT K):
 
