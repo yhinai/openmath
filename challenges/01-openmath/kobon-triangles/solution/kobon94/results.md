@@ -1,189 +1,214 @@
 # Kobon triangles — is 94 attainable? (SAT sweep, host spark)
 
 Model: CNF of pseudoline arrangements extended by `kobon_missing.py` with K global
-"missing triangle" entries. With S = N(N-2) finite segments and three distinct, never
-shared sides per triangle, every arrangement in this model has `triangles >= (S-K)/3`.
-For N=18, S = 288: K=3 <=> >=95, **K=6 <=> >=94 (the decisive question)**, K=9 <=> >=93
-(best known), K=12 <=> >=92. **Caveat: arrangements with parallel line pairs are outside
-this model** — no claim here covers them.
+"missing triangle" entries. With S = N(N-2) finite segments and three distinct,
+never-shared sides per triangle, every arrangement in this model has
+`triangles >= (S - K) / 3`. For N=18, S = 288, so K=3 <=> >=95, **K=6 <=> >=94
+(the decisive question)**, K=9 <=> >=93 (best known), K=12 <=> >=92.
 
-## Calibration — N=11 (known: no 33-triangle arrangement, 32 is best)
+K=6 SAT would exhibit >= 94 triangles; K=6 UNSAT would prove 93 is the maximum in
+this model class. **Caveat, never overstated:** arrangements with parallel line
+pairs are outside this model.
 
-Boundary reproduced: K=0,1,2 UNSAT, K=3..9 SAT — first UNSAT K=0, first SAT K=3
+## Calibration (N=11; known: no 33-triangle arrangement, 32 is best)
+
+Boundary reproduced: K=0,1,2 UNSAT, K=3..9 SAT — first UNSAT K=2, first SAT K=3
 (>= 32 triangles). A sweep reproducing this boundary is trustworthy.
 
-## Thresholds per N (first UNSAT K / first SAT K)
+## Results — `results.txt` (append-only, exactly the logged rows in file order)
 
-- N=11: first UNSAT K=0, first SAT K=3; TIMEOUT at K=[]
+| N  | K  | verdict | seconds | notes |
+|----|----|---------|---------|-------|
+| 11 |  0 | UNSAT   | 0.5     | drat-trim verified |
+| 11 |  1 | UNSAT   | 9.3     | drat-trim verified |
+| 11 |  2 | UNSAT   | 97.3    | drat-trim verified |
+| 11 |  3 | SAT     | 34.0    |  |
+| 11 |  4 | SAT     | 50.5    |  |
+| 11 |  5 | SAT     | 272.2   |  |
+| 11 |  6 | SAT     | 37.4    |  |
+| 11 |  7 | SAT     | 82.4    |  |
+| 12 |  0 | UNSAT   | 1.1     | drat-trim verified |
+| 12 |  1 | UNSAT   | 19.7    | drat-trim verified |
+| 18 |  9 | SAT     | 6m      | >= 93 triangles, strongest N=18 SAT row; model kept |
+| 12 |  2 | UNSAT   | 261.2   | drat-trim verified |
+| 11 |  8 | SAT     | 907.4   |  |
+| 11 |  9 | SAT     | 13.1    |  |
+| 18 |  0 | UNSAT   | 30.3    | DRAT verified (96.6 s) |
+| 12 |  3 | TIMEOUT | 1800.0  |  |
+| 18 |  1 | UNSAT   | 1648.7  | DRAT verified, 10.5 GB proof |
+| 12 |  4 | TIMEOUT | 1800.0  |  |
+| 18 |  2 | TIMEOUT | 1800.0  |  |
+| 18 | 12 | SAT     | 1h      | >= 92 triangles; model kept |
+| 18 |  3 | TIMEOUT | 1h      |  |
+| 18 |  6 | TIMEOUT | 1h      | **decisive row — undecided** |
+| 12 |  5 | TIMEOUT | 1873.7  |  |
+| 18 |  3 | TIMEOUT | 1803.3  |  |
+| 12 |  6 | TIMEOUT | 1800.0  |  |
+| 18 |  4 | TIMEOUT | 1800.0  |  |
+| 12 |  7 | TIMEOUT | 1800.0  |  |
+| 18 |  5 | TIMEOUT | 1800.0  |  |
+| 12 |  8 | TIMEOUT | 1800.0  |  |
+| 18 |  7 | TIMEOUT | 1800.0  |  |
+| 12 |  9 | SAT     | 54.4    |  |
+| 13 |  0 | UNSAT   | 2.3     | drat-trim verified |
+| 13 |  1 | UNSAT   | 72.8    | drat-trim verified |
+| 13 |  2 | SAT     | 7.9     |  |
+| 13 |  3 | SAT     | 7.8     |  |
+| 13 |  4 | SAT     | 28.4    |  |
+| 13 |  5 | SAT     | 32.6    |  |
+| 13 |  6 | SAT     | 87.7    |  |
+| 13 |  7 | SAT     | 21.7    |  |
+| 13 |  8 | SAT     | 43.0    |  |
+| 13 |  9 | SAT     | 25.1    |  |
+| 15 |  0 | SAT     | 3.9     |  |
+| 15 |  1 | SAT     | 1.5     |  |
+| 15 |  2 | SAT     | 166.9   |  |
+| 15 |  3 | SAT     | 20.0    |  |
+| 15 |  4 | SAT     | 50.5    |  |
+| 15 |  5 | SAT     | 3.7     |  |
+| 15 |  6 | SAT     | 11.9    |  |
+| 15 |  7 | SAT     | 12.1    |  |
+| 15 |  8 | SAT     | 6.1     |  |
+| 15 |  9 | SAT     | 49.3    |  |
+| 15 | 10 | SAT     | 91.9    |  |
+| 15 | 11 | SAT     | 41.1    |  |
+| 15 | 12 | SAT     | 13.6    |  |
+| 17 |  0 | SAT     | 12.9    |  |
+| 17 |  1 | SAT     | 96.2    |  |
+| 17 |  2 | SAT     | 82.6    |  |
+| 17 |  3 | SAT     | 193.9   |  |
+| 17 |  4 | SAT     | 398.1   |  |
+| 17 |  5 | SAT     | 30.7    |  |
+| 17 |  6 | SAT     | 81.7    |  |
+| 18 |  8 | TIMEOUT | 1800.0  |  |
+| 19 |  0 | UNSAT   | 407.4   | DRAT verified, 3.0 GB proof |
+| 18 | 10 | TIMEOUT | 1800.0  |  |
+| 19 |  1 | TIMEOUT | 1800.0  |  |
+| 19 |  2 | SAT     | 89.1    |  |
+| 19 |  3 | SAT     | 186.2   |  |
+| 19 |  4 | SAT     | 635.9   |  |
+| 19 |  5 | SAT     | 329.4   |  |
+| 18 | 11 | TIMEOUT | 1800.0  |  |
+| 19 |  6 | TIMEOUT | 1800.0  |  |
+| 21 |  0 | SAT     | 87.6    |  |
+| 18 | 13 | TIMEOUT | 1800.0  |  |
+| 21 |  1 | SAT     | 162.1   |  |
+| 18 | 14 | TIMEOUT | 1800.0  |  |
+| 21 |  2 | TIMEOUT | 1800.0  |  |
+| 18 | 15 | SAT     | 570.2   | >= 91 triangles (weak row); model kept |
+| 21 |  3 | TIMEOUT | 1800.0  |  |
+| 18 | 16 | TIMEOUT | 1800.0  |  |
+| 18 | 17 | SAT     | 1117.7  | >= 91 triangles (weak row); model kept |
+| 21 |  4 | TIMEOUT | 1800.0  |  |
+| 21 |  5 | SAT     | 1581.5  | >= 81 triangles; model kept |
+| 18 | 18 | TIMEOUT | 1800.0  |  |
+| 18 | 19 | SAT     | 875.3   | >= 90 triangles (weak row); model kept |
+| 18 | 20 | SAT     | 937.5   | >= 89 triangles (weak row); model kept |
+| 21 |  6 | SAT     | 1379.9  | >= 80 triangles; model kept |
+| 23 |  0 | SAT     | 144.8   | >= 161 triangles; model kept |
+| 23 |  1 | SAT     | 134.8   | >= 160 triangles; model kept |
+| 18 | 21 | TIMEOUT | 1800.0  |  |
+| 18 | 22 | SAT     | 548.6   | >= 88 triangles (weak row); model kept |
+| 23 |  2 | TIMEOUT | 1800.0  |  |
+| 18 | 23 | SAT     | 1344.1  | >= 88 triangles (weak row); model kept |
+| 23 |  3 | TIMEOUT | 1800.0  |  |
+| 18 | 24 | SAT     | 1605.0  |  |
+| 23 |  4 | TIMEOUT | 1800.0  |  |
+| 18 | 25 | SAT     | 1679.6  |  |
+| 18 | 26 | SAT     | 267.7   |  |
+| 23 |  5 | TIMEOUT | 1800.0  |  |
+| 18 | 27 | TIMEOUT | 1800.0  |  |
+| 23 |  6 | TIMEOUT | 1800.0  |  |
+| 18 | 28 | SAT     | 829.8   |  |
+| 25 |  0 | TIMEOUT | 1800.0  |  |
+| 18 | 29 | TIMEOUT | 1800.0  |  |
+| 18 | 30 | TIMEOUT | 1145.4  |  |
+| 25 |  1 | TIMEOUT | 1297.9  |  |
+| 18 | 31 | SAT     | 1102.6  |  |
+| 25 |  2 | TIMEOUT | 1800.0  |  |
+| 18 | 32 | TIMEOUT | 1800.0  |  |
+| 25 |  3 | TIMEOUT | 1800.0  |  |
+| 18 | 33 | TIMEOUT | 1800.0  |  |
+| 25 |  4 | TIMEOUT | 1800.0  |  |
+| 18 | 34 | TIMEOUT | 1800.0  |  |
+| 18 | 35 | SAT     | 177.1   |  |
+| 18 | 36 | SAT     | 377.4   |  |
+| 25 |  5 | TIMEOUT | 1800.0  |  |
+| 18 | 37 | SAT     | 1387.9  |  |
+| 25 |  6 | TIMEOUT | 1800.0  |  |
+| 18 | 38 | SAT     | 1491.7  |  |
+| 27 |  0 | TIMEOUT | 1800.0  |  |
+| 18 | 39 | TIMEOUT | 1800.0  |  |
+| 27 |  1 | TIMEOUT | 1800.0  |  |
+| 18 | 40 | TIMEOUT | 1800.0  |  |
+| 27 |  2 | TIMEOUT | 1800.0  |  |
+| 18 | 41 | SAT     | 1130.6  |  |
+| 27 |  3 | TIMEOUT | 1800.0  |  |
+| 18 | 42 | TIMEOUT | 1800.0  |  |
+| 18 | 43 | SAT     | 1250.0  |  |
+| 27 |  4 | TIMEOUT | 1800.0  |  |
+
+Thresholds per N (first UNSAT K / first SAT K):
+
+- N=11: first UNSAT K=0, first SAT K=3
 - N=12: first UNSAT K=0, first SAT K=9; TIMEOUT at K=[3, 4, 5, 6, 7, 8]
-- N=13: first UNSAT K=0, first SAT K=2; TIMEOUT at K=[]
-- N=15: first UNSAT K=—, first SAT K=0; TIMEOUT at K=[]
-- N=17: first UNSAT K=—, first SAT K=0; TIMEOUT at K=[]
-- N=18: first UNSAT K=0, first SAT K=9; TIMEOUT at K=[2, 3, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16, 18, 21, 27, 29, 30, 32, 33, 34, 39, 40, 42]
+- N=13: first UNSAT K=0, first SAT K=2
+- N=15: first UNSAT K=—, first SAT K=0
+- N=17: first UNSAT K=—, first SAT K=0
+- N=18: first UNSAT K=0, first SAT K=9; TIMEOUT at K=[2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16, 18, 21, 27, 29, 30, 32, 33, 34, 39, 40, 42]
 - N=19: first UNSAT K=0, first SAT K=2; TIMEOUT at K=[1, 6]
 - N=21: first UNSAT K=—, first SAT K=0; TIMEOUT at K=[2, 3, 4]
 - N=23: first UNSAT K=—, first SAT K=0; TIMEOUT at K=[2, 3, 4, 5, 6]
 - N=25: first UNSAT K=—, first SAT K=—; TIMEOUT at K=[0, 1, 2, 3, 4, 5, 6]
-- N=27: first UNSAT K=—, first SAT K=—; TIMEOUT at K=[0, 1, 2, 3]
+- N=27: first UNSAT K=—, first SAT K=—; TIMEOUT at K=[0, 1, 2, 3, 4]
 
 ## Decisive row (N=18, K=6)
 
-**Not decided — TIMEOUT** (1800 s in the sweep; 1 h in the parallel probe). No `s` line
-from the dedicated proof attempt (`kissat --no-binary` on `p-18-6.cnf`, SIGTERM'd at
-1 h 50 m; the 36 GB leftover `day_work/p-18-6.drat` holds no conclusion). Sweep drivers
-skip rows already in `results.txt`, so the timeout is recorded, not retried.
+**Not decided — TIMEOUT, twice** (1800 s in the sweep; 1 h in the parallel probe).
+The dedicated proof attempt (`kissat --no-binary` on `p-18-6.cnf`) was SIGTERM'd at
+1 h 50 m with no `s` line; the leftover `day_work/p-18-6.drat` (36 GB) contains no
+conclusion. The sweep drivers skip rows already in `results.txt`, so the timeout is
+recorded and not retried automatically.
 
-So: **no headline result and no 94-triangle discovery, and no basis for a UNSAT claim at
-K=6.** The strongest genuine N=18 model is K=9 (>= 93 triangles). Second attack live:
-`day_deep.py`, 17 kissat seeds over N=18 K=5..8 (8 on K=6), `deep_work/deep-18-<K>-<seed>.log`,
-results `deep_results.txt` — still empty; no seed finished, none skipped. Third launch
-(15:15:57) via `launch_all.py` double-forks into `os.setsid()`, so session teardown cannot
-reach it; `drivers_watchdog.sh` (cron `*/5`, `@reboot`) reruns it idempotently. Host reboots
-on a ~6 h cycle (14:37, 20:38, 02:38, 08:39, 14:39), which `setsid` does not survive.
+A second, independent attack on the decisive band is live: `day_deep.py` runs **17 kissat
+seeds** over N=18 K=5,6,7,8 (8 seeds on K=6 — the decisive row — plus 3 each on K=5,
+K=7, K=8), logs in `deep_work/deep-18-<K>-<seed>.log`, driver log `deep_run.log`, results
+`deep_results.txt`. A `s SATISFIABLE` from any K=6 seed would be the discovery case.
+Three launches so far, `deep_results.txt` still empty (no seed has finished or been
+recorded yet, so nothing is lost and no seed is skipped):
 
-Genuine N=18 models on record (`s SATISFIABLE`, kept in `day_work/`): K=9 (strongest, >= 93),
-12, 15, 17, 19, 20, 22, 23, 24, 25, 26, 28, 31, 35, 36, 37, 38, 41. All others give >= 92 or
-the weak >= 91 bound. N=18 UNSAT: K=0, 1.
+1. 12:34 — died in the 14:39 host reboot, no verdict.
+2. 14:44 — died at ~14:44:5x, no verdict. Cause: the drivers had been started *inside*
+   the supervisor cron session and were killed with that session's process group when the
+   session ended — not a reboot.
+3. 15:15:57 — launched via `launch_all.py`, which double-forks each driver into its own
+   `os.setsid()` session, so a session teardown cannot reach it.
+
+Host context for interpreting the timeline: spark reboots on a **~6 h cycle** (boots
+14:37, 20:38, 02:38, 08:39, 14:39 — next ~20:39). `setsid` does not survive a reboot, so
+a crontab entry was installed mirroring the certifier's: `drivers_watchdog.sh` on `*/5`
+and `@reboot`, which reruns `launch_all.py` (idempotent — skips any driver already
+alive). The sweep now recovers from both failure modes unattended.
+
+Genuine N=18 models (`s SATISFIABLE`) on record: K=9, 12, 15, 17, 19, 20, 22, 23, 24, 25, 26, 28, 31, 35, 36, 37, 38, 41, 43
+(K=9 is the strongest, >= 93 triangles;
+the rest only give >= 92 or the weak >= 91 bound). They are kept under `day_work/`.
+N=18 rows on record: K=0, 1 UNSAT;
+K=2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16, 18, 21, 27, 29, 30, 32, 33, 34, 39, 40, 42 TIMEOUT; K=9, 12, 15, 17, 19, 20, 22, 23, 24, 25, 26, 28, 31, 35, 36, 37, 38, 41, 43 SAT.
+So: no headline result, no 94-triangle discovery, and no basis for an UNSAT claim at K=6.
+N=21 rows TIMEOUT at K=2, 3, 4 (no verdict yet).
+
+Rows still unresolved (no verdict on both sides of the boundary): N=15, 17, 21, 23, 25, 27.
 
 ## Machine-checked certificates (`day_work/certifier_state.json`)
 
-Certifier babysitter (cron `*/5`, `certifier_watchdog.sh` -> `certifier.py`) re-solves every
-UNSAT row with a DRAT trace and checks it with drat-trim. Verified `s VERIFIED`: 11:0, 11:1,
-11:2, 12:0, 12:1, 12:2, 13:0, 13:1, 18:0, 18:1 (10.5 GB proof), 19:0 (3.0 GB proof) — 11 rows,
-every UNSAT row on record.
+Certifier babysitter (cron `*/5`, `certifier_watchdog.sh` -> `certifier.py`)
+re-solves every UNSAT row with a DRAT trace and checks it with drat-trim.
+Verified: 11:0, 11:1, 11:2, 12:0, 12:1, 12:2, 13:0, 13:1, 18:0, 18:1 (10.5 GB
+proof, `s VERIFIED`, rc=0), 19:0 (3.0 GB proof) — 11 rows, all `s VERIFIED`.
+Every UNSAT row on record is now machine-checked; everything else is TIMEOUT/SAT.
 
 Disk: 465 GB of 3.7 TB used on `/`; `day_work` 51 GB, `deep_work` 57 MB.
 
-Status text is regenerated by the supervisor cron job; `results.txt` is the raw append-only
-log from the sweep drivers (`day_run.py`, `day_run2.py`), 126 rows.
-
-## Results — `results.txt` (append-only, logged order)
-
-| N | K | verdict | seconds |
-|---|---|---------|---------|
-| 11 | 0 | UNSAT | 0.5 |
-| 11 | 1 | UNSAT | 9.3 |
-| 11 | 2 | UNSAT | 97.3 |
-| 11 | 3 | SAT | 34.0 |
-| 11 | 4 | SAT | 50.5 |
-| 11 | 5 | SAT | 272.2 |
-| 11 | 6 | SAT | 37.4 |
-| 11 | 7 | SAT | 82.4 |
-| 12 | 0 | UNSAT | 1.1 |
-| 12 | 1 | UNSAT | 19.7 |
-| 18 | 9 | SAT | 6m |
-| 12 | 2 | UNSAT | 261.2 |
-| 11 | 8 | SAT | 907.4 |
-| 11 | 9 | SAT | 13.1 |
-| 18 | 0 | UNSAT | 30.3 |
-| 12 | 3 | TIMEOUT | 1800.0 |
-| 18 | 1 | UNSAT | 1648.7 |
-| 12 | 4 | TIMEOUT | 1800.0 |
-| 18 | 2 | TIMEOUT | 1800.0 |
-| 18 | 12 | SAT | 1h |
-| 18 | 3 | TIMEOUT | 1h |
-| 18 | 6 | TIMEOUT | 1h |
-| 12 | 5 | TIMEOUT | 1873.7 |
-| 18 | 3 | TIMEOUT | 1803.3 |
-| 12 | 6 | TIMEOUT | 1800.0 |
-| 18 | 4 | TIMEOUT | 1800.0 |
-| 12 | 7 | TIMEOUT | 1800.0 |
-| 18 | 5 | TIMEOUT | 1800.0 |
-| 12 | 8 | TIMEOUT | 1800.0 |
-| 18 | 7 | TIMEOUT | 1800.0 |
-| 12 | 9 | SAT | 54.4 |
-| 13 | 0 | UNSAT | 2.3 |
-| 13 | 1 | UNSAT | 72.8 |
-| 13 | 2 | SAT | 7.9 |
-| 13 | 3 | SAT | 7.8 |
-| 13 | 4 | SAT | 28.4 |
-| 13 | 5 | SAT | 32.6 |
-| 13 | 6 | SAT | 87.7 |
-| 13 | 7 | SAT | 21.7 |
-| 13 | 8 | SAT | 43.0 |
-| 13 | 9 | SAT | 25.1 |
-| 15 | 0 | SAT | 3.9 |
-| 15 | 1 | SAT | 1.5 |
-| 15 | 2 | SAT | 166.9 |
-| 15 | 3 | SAT | 20.0 |
-| 15 | 4 | SAT | 50.5 |
-| 15 | 5 | SAT | 3.7 |
-| 15 | 6 | SAT | 11.9 |
-| 15 | 7 | SAT | 12.1 |
-| 15 | 8 | SAT | 6.1 |
-| 15 | 9 | SAT | 49.3 |
-| 15 | 10 | SAT | 91.9 |
-| 15 | 11 | SAT | 41.1 |
-| 15 | 12 | SAT | 13.6 |
-| 17 | 0 | SAT | 12.9 |
-| 17 | 1 | SAT | 96.2 |
-| 17 | 2 | SAT | 82.6 |
-| 17 | 3 | SAT | 193.9 |
-| 17 | 4 | SAT | 398.1 |
-| 17 | 5 | SAT | 30.7 |
-| 17 | 6 | SAT | 81.7 |
-| 18 | 8 | TIMEOUT | 1800.0 |
-| 19 | 0 | UNSAT | 407.4 |
-| 18 | 10 | TIMEOUT | 1800.0 |
-| 19 | 1 | TIMEOUT | 1800.0 |
-| 19 | 2 | SAT | 89.1 |
-| 19 | 3 | SAT | 186.2 |
-| 19 | 4 | SAT | 635.9 |
-| 19 | 5 | SAT | 329.4 |
-| 18 | 11 | TIMEOUT | 1800.0 |
-| 19 | 6 | TIMEOUT | 1800.0 |
-| 21 | 0 | SAT | 87.6 |
-| 18 | 13 | TIMEOUT | 1800.0 |
-| 21 | 1 | SAT | 162.1 |
-| 18 | 14 | TIMEOUT | 1800.0 |
-| 21 | 2 | TIMEOUT | 1800.0 |
-| 18 | 15 | SAT | 570.2 |
-| 21 | 3 | TIMEOUT | 1800.0 |
-| 18 | 16 | TIMEOUT | 1800.0 |
-| 18 | 17 | SAT | 1117.7 |
-| 21 | 4 | TIMEOUT | 1800.0 |
-| 21 | 5 | SAT | 1581.5 |
-| 18 | 18 | TIMEOUT | 1800.0 |
-| 18 | 19 | SAT | 875.3 |
-| 18 | 20 | SAT | 937.5 |
-| 21 | 6 | SAT | 1379.9 |
-| 23 | 0 | SAT | 144.8 |
-| 23 | 1 | SAT | 134.8 |
-| 18 | 21 | TIMEOUT | 1800.0 |
-| 18 | 22 | SAT | 548.6 |
-| 23 | 2 | TIMEOUT | 1800.0 |
-| 18 | 23 | SAT | 1344.1 |
-| 23 | 3 | TIMEOUT | 1800.0 |
-| 18 | 24 | SAT | 1605.0 |
-| 23 | 4 | TIMEOUT | 1800.0 |
-| 18 | 25 | SAT | 1679.6 |
-| 18 | 26 | SAT | 267.7 |
-| 23 | 5 | TIMEOUT | 1800.0 |
-| 18 | 27 | TIMEOUT | 1800.0 |
-| 23 | 6 | TIMEOUT | 1800.0 |
-| 18 | 28 | SAT | 829.8 |
-| 25 | 0 | TIMEOUT | 1800.0 |
-| 18 | 29 | TIMEOUT | 1800.0 |
-| 18 | 30 | TIMEOUT | 1145.4 |
-| 25 | 1 | TIMEOUT | 1297.9 |
-| 18 | 31 | SAT | 1102.6 |
-| 25 | 2 | TIMEOUT | 1800.0 |
-| 18 | 32 | TIMEOUT | 1800.0 |
-| 25 | 3 | TIMEOUT | 1800.0 |
-| 18 | 33 | TIMEOUT | 1800.0 |
-| 25 | 4 | TIMEOUT | 1800.0 |
-| 18 | 34 | TIMEOUT | 1800.0 |
-| 18 | 35 | SAT | 177.1 |
-| 18 | 36 | SAT | 377.4 |
-| 25 | 5 | TIMEOUT | 1800.0 |
-| 18 | 37 | SAT | 1387.9 |
-| 25 | 6 | TIMEOUT | 1800.0 |
-| 18 | 38 | SAT | 1491.7 |
-| 27 | 0 | TIMEOUT | 1800.0 |
-| 18 | 39 | TIMEOUT | 1800.0 |
-| 27 | 1 | TIMEOUT | 1800.0 |
-| 18 | 40 | TIMEOUT | 1800.0 |
-| 27 | 2 | TIMEOUT | 1800.0 |
-| 18 | 41 | SAT | 1130.6 |
-| 27 | 3 | TIMEOUT | 1800.0 |
-| 18 | 42 | TIMEOUT | 1800.0 |
+Status text is regenerated by the supervisor cron job; `results.txt` is the raw
+append-only log from the sweep drivers (`day_run.py`, `day_run2.py`).
