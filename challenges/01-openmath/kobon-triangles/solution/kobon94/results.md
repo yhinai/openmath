@@ -140,6 +140,9 @@ Boundary reproduced: K=0,1,2 UNSAT, K=3..9 SAT — first UNSAT K=2, first SAT K=
 | 27 |  0 | TIMEOUT | 1800.0  |  |
 | 18 | 39 | TIMEOUT | 1800.0  |  |
 | 27 |  1 | TIMEOUT | 1800.0  |  |
+| 18 | 40 | TIMEOUT | 1800.0  |  |
+| 27 |  2 | TIMEOUT | 1800.0  |  |
+| 18 | 41 | SAT     | 1130.6  |  |
 
 Thresholds per N (first UNSAT K / first SAT K):
 
@@ -148,12 +151,12 @@ Thresholds per N (first UNSAT K / first SAT K):
 - N=13: first UNSAT K=0, first SAT K=2
 - N=15: first UNSAT K=—, first SAT K=0
 - N=17: first UNSAT K=—, first SAT K=0
-- N=18: first UNSAT K=0, first SAT K=9; TIMEOUT at K=[2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16, 18, 21, 27, 29, 30, 32, 33, 34, 39]
+- N=18: first UNSAT K=0, first SAT K=9; TIMEOUT at K=[2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16, 18, 21, 27, 29, 30, 32, 33, 34, 39, 40]
 - N=19: first UNSAT K=0, first SAT K=2; TIMEOUT at K=[1, 6]
 - N=21: first UNSAT K=—, first SAT K=0; TIMEOUT at K=[2, 3, 4]
 - N=23: first UNSAT K=—, first SAT K=0; TIMEOUT at K=[2, 3, 4, 5, 6]
 - N=25: first UNSAT K=—, first SAT K=—; TIMEOUT at K=[0, 1, 2, 3, 4, 5, 6]
-- N=27: first UNSAT K=—, first SAT K=—; TIMEOUT at K=[0, 1]
+- N=27: first UNSAT K=—, first SAT K=—; TIMEOUT at K=[0, 1, 2]
 
 ## Decisive row (N=18, K=6)
 
@@ -183,11 +186,11 @@ a crontab entry was installed mirroring the certifier's: `drivers_watchdog.sh` o
 and `@reboot`, which reruns `launch_all.py` (idempotent — skips any driver already
 alive). The sweep now recovers from both failure modes unattended.
 
-Genuine N=18 models (`s SATISFIABLE`) on record: K=9, 12, 15, 17, 19, 20, 22, 23, 24, 25, 26, 28, 31, 35, 36, 37, 38
+Genuine N=18 models (`s SATISFIABLE`) on record: K=9, 12, 15, 17, 19, 20, 22, 23, 24, 25, 26, 28, 31, 35, 36, 37, 38, 41
 (K=9 is the strongest, >= 93 triangles;
 the rest only give >= 92 or the weak >= 91 bound). They are kept under `day_work/`.
 N=18 rows on record: K=0, 1 UNSAT;
-K=2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16, 18, 21, 27, 29, 30, 32, 33, 34, 39 TIMEOUT; K=9, 12, 15, 17, 19, 20, 22, 23, 24, 25, 26, 28, 31, 35, 36, 37, 38 SAT.
+K=2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16, 18, 21, 27, 29, 30, 32, 33, 34, 39, 40 TIMEOUT; K=9, 12, 15, 17, 19, 20, 22, 23, 24, 25, 26, 28, 31, 35, 36, 37, 38, 41 SAT.
 So: no headline result, no 94-triangle discovery, and no basis for an UNSAT claim at K=6.
 N=21 rows TIMEOUT at K=2, 3, 4 (no verdict yet).
 
