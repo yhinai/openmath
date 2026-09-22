@@ -112,40 +112,40 @@ Boundary reproduced: K=0,1,2 UNSAT, K=3..9 SAT — first UNSAT K=2, first SAT K=
 | 23 |  2 | TIMEOUT | 1800.0  |  |
 | 18 | 23 | SAT     | 1344.1  | >= 88 triangles (weak row); model kept |
 | 23 |  3 | TIMEOUT | 1800.0  |  |
-| 18 | 24 | SAT     | 1605.0  |  |
+| 18 | 24 | SAT     | 1605.0  | >= 88 triangles (weak row); model kept |
 | 23 |  4 | TIMEOUT | 1800.0  |  |
-| 18 | 25 | SAT     | 1679.6  |  |
-| 18 | 26 | SAT     | 267.7   |  |
+| 18 | 25 | SAT     | 1679.6  | >= 87 triangles (weak row); model kept |
+| 18 | 26 | SAT     | 267.7   | >= 87 triangles (weak row); model kept |
 | 23 |  5 | TIMEOUT | 1800.0  |  |
 | 18 | 27 | TIMEOUT | 1800.0  |  |
 | 23 |  6 | TIMEOUT | 1800.0  |  |
-| 18 | 28 | SAT     | 829.8   |  |
+| 18 | 28 | SAT     | 829.8   | >= 86 triangles (weak row); model kept |
 | 25 |  0 | TIMEOUT | 1800.0  |  |
 | 18 | 29 | TIMEOUT | 1800.0  |  |
 | 18 | 30 | TIMEOUT | 1145.4  |  |
 | 25 |  1 | TIMEOUT | 1297.9  |  |
-| 18 | 31 | SAT     | 1102.6  |  |
+| 18 | 31 | SAT     | 1102.6  | >= 85 triangles (weak row); model kept |
 | 25 |  2 | TIMEOUT | 1800.0  |  |
 | 18 | 32 | TIMEOUT | 1800.0  |  |
 | 25 |  3 | TIMEOUT | 1800.0  |  |
 | 18 | 33 | TIMEOUT | 1800.0  |  |
 | 25 |  4 | TIMEOUT | 1800.0  |  |
 | 18 | 34 | TIMEOUT | 1800.0  |  |
-| 18 | 35 | SAT     | 177.1   |  |
-| 18 | 36 | SAT     | 377.4   |  |
+| 18 | 35 | SAT     | 177.1   | >= 84 triangles (weak row); model kept |
+| 18 | 36 | SAT     | 377.4   | >= 84 triangles (weak row); model kept |
 | 25 |  5 | TIMEOUT | 1800.0  |  |
-| 18 | 37 | SAT     | 1387.9  |  |
+| 18 | 37 | SAT     | 1387.9  | >= 83 triangles (weak row); model kept |
 | 25 |  6 | TIMEOUT | 1800.0  |  |
-| 18 | 38 | SAT     | 1491.7  |  |
+| 18 | 38 | SAT     | 1491.7  | >= 83 triangles (weak row); model kept |
 | 27 |  0 | TIMEOUT | 1800.0  |  |
 | 18 | 39 | TIMEOUT | 1800.0  |  |
 | 27 |  1 | TIMEOUT | 1800.0  |  |
 | 18 | 40 | TIMEOUT | 1800.0  |  |
 | 27 |  2 | TIMEOUT | 1800.0  |  |
-| 18 | 41 | SAT     | 1130.6  |  |
+| 18 | 41 | SAT     | 1130.6  | >= 82 triangles (weak row); model kept |
 | 27 |  3 | TIMEOUT | 1800.0  |  |
 | 18 | 42 | TIMEOUT | 1800.0  |  |
-| 18 | 43 | SAT     | 1250.0  |  |
+| 18 | 43 | SAT     | 1250.0  | >= 81 triangles (weak row); model kept |
 | 27 |  4 | TIMEOUT | 1800.0  |  |
 | 18 | 44 | TIMEOUT | 1800.0  |  |
 | 27 |  5 | TIMEOUT | 1800.0  |  |
@@ -153,6 +153,11 @@ Boundary reproduced: K=0,1,2 UNSAT, K=3..9 SAT — first UNSAT K=2, first SAT K=
 | 27 |  6 | TIMEOUT | 1800.0  |  |
 | 18 | 46 | TIMEOUT | 1800.0  |  |
 | 29 |  0 | TIMEOUT | 1800.0  |  |
+| 18 | 47 | SAT     | 1303.1  | >= 80 triangles (weak row); model kept |
+| 29 |  1 | TIMEOUT | 1800.0  |  |
+| 18 | 48 | SAT     | 1187.3  | >= 80 triangles (weak row); model kept |
+| 16 |  0 | UNSAT   | 33.3    | DRAT verified (55.8 s) |
+| 16 |  1 | UNSAT   | 699.3   | cert pending |
 
 Thresholds per N (first UNSAT K / first SAT K):
 
@@ -160,6 +165,7 @@ Thresholds per N (first UNSAT K / first SAT K):
 - N=12: first UNSAT K=0, first SAT K=9; TIMEOUT at K=[3, 4, 5, 6, 7, 8]
 - N=13: first UNSAT K=0, first SAT K=2
 - N=15: first UNSAT K=—, first SAT K=0
+- N=16: first UNSAT K=0, first SAT K=—
 - N=17: first UNSAT K=—, first SAT K=0
 - N=18: first UNSAT K=0, first SAT K=9; TIMEOUT at K=[2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16, 18, 21, 27, 29, 30, 32, 33, 34, 39, 40, 42, 44, 45, 46]
 - N=19: first UNSAT K=0, first SAT K=2; TIMEOUT at K=[1, 6]
@@ -167,7 +173,7 @@ Thresholds per N (first UNSAT K / first SAT K):
 - N=23: first UNSAT K=—, first SAT K=0; TIMEOUT at K=[2, 3, 4, 5, 6]
 - N=25: first UNSAT K=—, first SAT K=—; TIMEOUT at K=[0, 1, 2, 3, 4, 5, 6]
 - N=27: first UNSAT K=—, first SAT K=—; TIMEOUT at K=[0, 1, 2, 3, 4, 5, 6]
-- N=29: first UNSAT K=—, first SAT K=—; TIMEOUT at K=[0]
+- N=29: first UNSAT K=—, first SAT K=—; TIMEOUT at K=[0, 1]
 
 ## Decisive row (N=18, K=6)
 
@@ -181,7 +187,7 @@ A second, independent attack on the decisive band is live: `day_deep.py` runs **
 seeds** over N=18 K=5,6,7,8 (8 seeds on K=6 — the decisive row — plus 3 each on K=5,
 K=7, K=8), logs in `deep_work/deep-18-<K>-<seed>.log`, driver log `deep_run.log`, results
 `deep_results.txt`. A `s SATISFIABLE` from any K=6 seed would be the discovery case.
-Three launches so far, `deep_results.txt` still empty (no seed has finished or been
+Three launches so far, no verdict recorded (17 seed logs on disk, 0 verdict line(s) (`s ...`) so far; `deep_results.txt` still missing; no seed has finished or been
 recorded yet, so nothing is lost and no seed is skipped):
 
 1. 12:34 — died in the 14:39 host reboot, no verdict.
@@ -197,25 +203,28 @@ a crontab entry was installed mirroring the certifier's: `drivers_watchdog.sh` o
 and `@reboot`, which reruns `launch_all.py` (idempotent — skips any driver already
 alive). The sweep now recovers from both failure modes unattended.
 
-Genuine N=18 models (`s SATISFIABLE`) on record: K=9, 12, 15, 17, 19, 20, 22, 23, 24, 25, 26, 28, 31, 35, 36, 37, 38, 41, 43
+Genuine N=18 models (`s SATISFIABLE`) on record: K=9, 12, 15, 17, 19, 20, 22, 23, 24, 25, 26, 28, 31, 35, 36, 37, 38, 41, 43, 47, 48
 (K=9 is the strongest, >= 93 triangles;
 the rest only give >= 92 or the weak >= 91 bound). They are kept under `day_work/`.
 N=18 rows on record: K=0, 1 UNSAT;
-K=2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16, 18, 21, 27, 29, 30, 32, 33, 34, 39, 40, 42, 44, 45, 46 TIMEOUT; K=9, 12, 15, 17, 19, 20, 22, 23, 24, 25, 26, 28, 31, 35, 36, 37, 38, 41, 43 SAT.
+K=2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16, 18, 21, 27, 29, 30, 32, 33, 34, 39, 40, 42, 44, 45, 46 TIMEOUT; K=9, 12, 15, 17, 19, 20, 22, 23, 24, 25, 26, 28, 31, 35, 36, 37, 38, 41, 43, 47, 48 SAT.
 So: no headline result, no 94-triangle discovery, and no basis for an UNSAT claim at K=6.
 N=21 rows TIMEOUT at K=2, 3, 4 (no verdict yet).
 
-Rows still unresolved (no verdict on both sides of the boundary): N=15, 17, 21, 23, 25, 27, 29.
+Rows still unresolved (no verdict on both sides of the boundary): N=15, 16, 17, 21, 23, 25, 27, 29.
 
 ## Machine-checked certificates (`day_work/certifier_state.json`)
 
 Certifier babysitter (cron `*/5`, `certifier_watchdog.sh` -> `certifier.py`)
 re-solves every UNSAT row with a DRAT trace and checks it with drat-trim.
-Verified: 11:0, 11:1, 11:2, 12:0, 12:1, 12:2, 13:0, 13:1, 18:0, 18:1 (10.5 GB
-proof, `s VERIFIED`, rc=0), 19:0 (3.0 GB proof) — 11 rows, all `s VERIFIED`.
-Every UNSAT row on record is now machine-checked; everything else is TIMEOUT/SAT.
+Verified by drat-trim: 11:0, 11:1, 11:2, 12:0, 12:1, 12:2, 13:0, 13:1, 16:0, 18:0, 18:1, 19:0 — 12 rows, all `s VERIFIED`
+(the largest are 18:1, a 10.5 GB proof, and 19:0, 3.0 GB). UNSAT rows on record:
+11:0, 11:1, 11:2, 12:0, 12:1, 12:2, 13:0, 13:1, 16:0, 16:1, 18:0, 18:1, 19:0. Every UNSAT row on record is machine-checked; everything else is
+TIMEOUT/SAT.
 
-Disk: 465 GB of 3.7 TB used on `/`; `day_work` 51 GB, `deep_work` 57 MB.
+Disk: 499 GB of 4.0 TB used on `/`;
+`day_work` 52G,
+`deep_work` 66M.
 
 Status text is regenerated by the supervisor cron job; `results.txt` is the raw
 append-only log from the sweep drivers (`day_run.py`, `day_run2.py`).
